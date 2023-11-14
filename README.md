@@ -122,6 +122,11 @@ Log and manage title plays.
   - Arg BGG_ID ❌ - list title logged plays
 - `mpl play stats` ❌ - view title play stats
 
+## Configs
+
+- `update_on_change` - automatically pass `--update` to add/drop operations. Default `false`
+- `default_stash` - the default stash to perform add/drop operations on. Default `default`
+
 ## Resources
 
 - [Changelog](docs/changelog.md) - See a history of implemented features/changes.
