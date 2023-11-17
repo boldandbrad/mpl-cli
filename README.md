@@ -12,7 +12,7 @@ Please track the progress of features throughout this README with the following 
 | Symbol    | Status            |
 | -         | -                 |
 | ✅        | Implemented       |
-| 🚧        | Work In Progress  |
+| 🚧        | Work in Progress  |
 | ❌        | Not Started       |
 
 ## Install
@@ -69,6 +69,10 @@ BoardGameGeek specific actions.
   - Arg BGG_ID(s) - open titles on boardgamegeek.com
 - `mpl bgg import` ❌ - import bgg collections
 - `mpl bgg hot` ❌ - view bgg hotness list
+- `mpl bgg preorders` ❌ - view active crowdfunding pre-orders list
+- `mpl bgg new` ❌ - view new releases list
+- `mpl bgg market search` ❌ - view current GeekMarket listings
+- `mpl bgg market open` ❌ - open a GeekMarket listing
 
 ### Profiles 🚧
 
