@@ -5,7 +5,7 @@
 
 # mpl
 
-![Crates.io](https://img.shields.io/crates/v/mpl-cli)
+[![Crates.io](https://img.shields.io/crates/v/mpl-cli)](https://crates.io/crates/mpl-cli)
 
 > **mpl**; short for **meeple** [`/mipel/`] *noun* -  a board game player
 > token. (E.g., <picture><source media="(prefers-color-scheme: dark)" srcset="assets/meeple-light.svg"><source media="(prefers-color-scheme: light)" srcset="assets/meeple-dark.svg"><img src="" style="vertical-align:top;" alt="meeple icon" width="24"></picture>)
@@ -83,7 +83,11 @@ Install **mpl** with your favorite of the methods below, or read the
     scoop install boldandbrad_scoop-bucket/mpl-cli
     ```
 
-### Install via [Cargo](https://crates.io) 📦 🚧 <a id="install-cargo"></a>
+### Install via [Cargo](https://crates.io) 📦 ✅ <a id="install-cargo"></a>
+
+> [!NOTE]
+> In order to install pre-releases (alpha/beta/pre) you must run `cargo install`
+> with `--version=<VERSION>`.
 
 - Install crate:
 
@@ -109,12 +113,12 @@ Install **mpl** with your favorite of the methods below, or read the
    for your platform
 2. Extract contents and install to a location in your `$PATH`
 
-### Manual install from source 👩‍💻 🚧 <a id="install-source"></a>
+### Manual install from source 👩‍💻 ✅ <a id="install-source"></a>
 
 1. Install [Rust](https://www.rust-lang.org/tools/install)
 2. Run `git clone https://github.com/boldandbrad/mpl-cli` and `cd mpl-cli`
 3. Run `cargo install --path .`
-4. Ensure `~/.cargo/bin` is in your `$PATH`
+4. Ensure `~/.cargo/bin` or `$CARGO_HOME/bin` is in your `$PATH`
 
 ## 🚀 Usage <a id="usage"></a>
 
