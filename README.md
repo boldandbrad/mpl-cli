@@ -4,19 +4,17 @@
 
 # mpl
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
-
 <!-- TODO: add badges -->
 
 > **mpl**; short for **meeple** [`/mipel/`] *noun* -  a board game player
-> token. (E.g., <i class="ti ti-meeple"></i>)
+> token. (E.g., <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:top;"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M9 20h-5a1 1 0 0 1 -1 -1c0 -2 3.378 -4.907 4 -6c-1 0 -4 -.5 -4 -2c0 -2 4 -3.5 6 -4c0 -1.5 .5 -4 3 -4s3 2.5 3 4c2 .5 6 2 6 4c0 1.5 -3 2 -4 2c.622 1.093 4 4 4 6a1 1 0 0 1 -1 1h-5c-1 0 -2 -4 -3 -4s-2 4 -3 4z" /></svg>)
 
 `mpl` is a local board game collection management CLI tool built in rust and
 powered by [BoardGameGeek](https://boardgamegeek.com) (BGG) public APIs.
 
-**Jump to:** [Features](#features) | [Installation](#📦-installation) | [Usage](#🚀-usage) | [Configuration](#⚙️-configuration) | [Resources](#📚-resources) | [Documentation 🔗](https://boldandbrad.github.io/mpl/)
+**Jump to:** [Features](#features) | [Installation](#install) | [Usage](#usage) | [Configuration](#config) | [Resources](#resources) | [Legal](#legal) | [Documentation](https://boldandbrad.github.io/mpl/) 🔗
 
-> [!WARNING] <br>
+> [!WARNING]<br>
 > `mpl` is currently in **ALPHA**. This means it is generally unstable and may be missing key features.
 > Please track the progress of features throughout this README with the following symbols:
 > | Symbol    | Status            |
@@ -41,7 +39,7 @@ powered by [BoardGameGeek](https://boardgamegeek.com) (BGG) public APIs.
 - Log and view game playthroughs
 - Multiple user support with profiles
 
-## 📦 Installation
+## 📦 Installation <a id="install"></a>
 
 Via [Homebrew](https://brew.sh) (macOS/Linux) ❌
 
@@ -63,7 +61,7 @@ Via Cargo 🚧
 cargo install mpl
 ```
 
-## 🚀 Usage
+## 🚀 Usage <a id="usage"></a>
 
 ```sh
 mpl
@@ -203,7 +201,7 @@ Log and manage title plays.
   - Arg BGG_ID ❌ - list title logged plays
 - `mpl play stats` ❌ - view title play stats
 
-## ⚙️ Configuration
+## ⚙️ Configuration <a id="config"></a>
 
 ### Environment Variables
 
@@ -225,14 +223,14 @@ These options can be managed with `mpl config`.
 
 > Coming soon.
 
-## 📚 Resources
+## 📚 Resources <a id="resources"></a>
 
 - [Changelog](docs/changelog.md) - See a history of implemented features/changes.
 - [Roadmap](https://github.com/boldandbrad/mpl-cli/milestones) - See a list of planned features and milestones.
 - [FAQ](docs/faq.md) - Find answers to common questions.
 - [Contributor Guide](docs/contributing.md) ❌ - Find out how to get involved.
 
-## ⚖️ Legal
+## ⚖️ Legal <a id="legal"></a>
 
 > Disclaimer: Neither `mpl-cli` nor its maintainers are affiliated with
 > [BoardGameGeek](https://boardgamegeek.com).
