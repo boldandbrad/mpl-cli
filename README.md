@@ -53,32 +53,50 @@ Install **mpl** with your favorite of the methods below, or read the
 
 ### Install via [Homebrew](https://brew.sh) 🍺 (macOS/Linux) ❌
 
-```sh
-brew tap boldandbrad/tap
-brew install mpl
-```
+1. Add tap:
+
+    ```sh
+    brew tap boldandbrad/tap
+    ```
+
+1. Install formula:
+
+    ```sh
+    brew install mpl
+    ```
 
 ### Install via [Scoop](https://scoop.sh) 🍦 (Windows) ❌
 
-```sh
-scoop bucket add boldandbrad_scoop-bucket https://github.com/boldandbrad/scoop-bucket
-scoop install boldandbrad_scoop-bucket/mpl
-```
+1. Add bucket:
+
+    ```sh
+    scoop bucket add boldandbrad_scoop-bucket https://github.com/boldandbrad/scoop-bucket
+    ```
+
+1. Install manifest:
+
+    ```sh
+    scoop install boldandbrad_scoop-bucket/mpl
+    ```
 
 ### Install via [Cargo](https://crates.io) 📦 🚧
 
-```sh
-cargo install mpl
-```
+- Install crate:
+
+  ```sh
+  cargo install mpl
+  ```
 
 ### Install via remote install script 📜 ❌
 
-> The [remote install script](scripts/install.sh) explains what it will do and
-> prompts before doing so.
+- Run script:
 
-```sh
-curl -LSfs https://raw.githubusercontent.com/boldandbrad/mpl-cli/main/ci/install.sh | sh -s -- --git boldandbrad/mpl-cli
-```
+  > [!NOTE] The [remote install script](scripts/install.sh) explains what it will do and
+  > prompts before doing so.
+
+  ```sh
+  curl -LSfs https://raw.githubusercontent.com/boldandbrad/mpl-cli/main/ci/install.sh | sh -s -- --git boldandbrad/mpl-cli
+  ```
 
 ### Manual install from GitHub Release ⬇️ 🚧
 
@@ -118,7 +136,7 @@ mpl stash list --verbose
 
 ### Start fresh 🧼
 
-`mpl` relies on BoardGameGeek item IDs to manage the titles you add to your
+**mpl** relies on BoardGameGeek item IDs to manage the titles you add to your
 stashes. The easiest way to get these is by searching BoardGameGeek:
 
 ```sh
@@ -247,7 +265,7 @@ Log and manage title plays.
 
 ### Environment Variables
 
-mpl respects the following env variables:
+**mpl** respects the following env variables:
 
 - `MPL_HOME`/`XDG_CONFIG_HOME` - change where `.mpl/` is stored. Default:
   `~/.mpl/`
@@ -281,7 +299,7 @@ setup, run `mpl config completions <SHELL>`.
 ## ⚖️ Legal <a id="legal"></a>
 
 > [!NOTE]<br>
-> Neither `mpl` nor its maintainers are affiliated with
+> Neither **mpl** nor its maintainers are affiliated with
 > [BoardGameGeek](https://boardgamegeek.com).
 
 Copyright (c) 2023 Bradley Wojcik. Released under the MIT License. See
