@@ -48,10 +48,10 @@ pub fn get_items(bgg_ids: Vec<String>) -> String {
         ("stats", "1"),
     ];
     // TODO: serialize returned xml to return vector of Titles?
-    return api_get("thing", params).unwrap();
+    api_get("thing", params).unwrap()
 }
 
 pub fn get_item(bgg_id: String) -> String {
     // TODO: return single Title instead of vector of length 1
-    return get_items(vec![bgg_id]);
+    get_items(vec![bgg_id])
 }

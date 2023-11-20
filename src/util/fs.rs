@@ -23,15 +23,15 @@ pub fn get_mpl_dir() -> PathBuf {
             let mut path = PathBuf::new().join(r"C:\").join("Users");
             path.push(user);
             path.push(mpl_root_dir);
-            return path;
+            path
         }
         &_ => PathBuf::from(mpl_root_dir),
     }
 }
 
-pub fn get_mpl_state_file() -> PathBuf {
-    return get_mpl_dir().join("state.yml");
-}
+// pub fn get_mpl_state_file() -> PathBuf {
+//     get_mpl_dir().join("state.yml")
+// }
 
 pub fn create_dirs(dir_path: &Path) -> std::io::Result<()> {
     std::fs::create_dir_all(dir_path)?;
@@ -69,12 +69,11 @@ pub fn check_fs() {
     // create default profile dir if no profiles exist
     let profile_dirs: Vec<PathBuf> = std::fs::read_dir(&profiles_dir)
         .unwrap()
-        .into_iter()
         .filter(|r| r.is_ok())
         .map(|r| r.unwrap().path())
         .filter(|r| r.is_dir())
         .collect();
-    if profile_dirs.len() == 0 {
+    if profile_dirs.is_empty() {
         let default_profile_name = get_system_user();
         create_profile_dir(&default_profile_name);
         create_profile_stash_dir(&default_profile_name, &DEFAULT_STASH_NAME.to_string());
