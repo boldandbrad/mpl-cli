@@ -19,6 +19,6 @@ jobs:
         uses: dtolnay/rust-toolchain@stable
 
       - name: Cargo Publish
-      - run: cargo publish --token ${CRATES_TOKEN}
+        run: cargo publish --token ${CRATES_TOKEN}
         env:
           CRATES_TOKEN: ${{ secrets.CRATES_TOKEN }}
