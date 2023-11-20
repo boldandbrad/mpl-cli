@@ -89,11 +89,11 @@ Install **mpl** with your favorite of the methods below, or read the
 
 ### Install via remote install script 📜 ❌
 
-- Run script:
+> [!NOTE]
+> The [remote install script](scripts/install.sh) explains what it will do and
+> prompts before doing so.
 
-  > [!NOTE]
-  > The [remote install script](scripts/install.sh) explains what it will do and
-  > prompts before doing so.
+- Run script:
 
   ```sh
   curl -LSfs https://raw.githubusercontent.com/boldandbrad/mpl-cli/main/ci/install.sh | sh -s -- --git boldandbrad/mpl-cli
