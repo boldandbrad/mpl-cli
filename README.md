@@ -7,7 +7,7 @@
 <!-- TODO: add badges -->
 
 > **mpl**; short for **meeple** [`/mipel/`] *noun* -  a board game player
-> token. (E.g., <picture><source media="(prefers-color-scheme: dark)" srcset="assets/meeple-light.svg"><source media="(prefers-color-scheme: light)" srcset="assets/meeple-dark.svg"><img src="" alt="meeple icon" width="24"></picture>)
+> token. (E.g., <picture><source media="(prefers-color-scheme: dark)" srcset="assets/meeple-light.svg"><source media="(prefers-color-scheme: light)" srcset="assets/meeple-dark.svg"><img src="" style="vertical-align:top;" alt="meeple icon" width="24"></picture>)
 
 `mpl` is a local board game collection management CLI tool built in rust and
 powered by [BoardGameGeek](https://boardgamegeek.com) (BGG) public APIs.
