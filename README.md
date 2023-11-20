@@ -5,7 +5,7 @@
 
 # mpl
 
-<!-- TODO: add badges -->
+![Crates.io](https://img.shields.io/crates/v/mpl-cli)
 
 > **mpl**; short for **meeple** [`/mipel/`] *noun* -  a board game player
 > token. (E.g., <picture><source media="(prefers-color-scheme: dark)" srcset="assets/meeple-light.svg"><source media="(prefers-color-scheme: light)" srcset="assets/meeple-dark.svg"><img src="" style="vertical-align:top;" alt="meeple icon" width="24"></picture>)
@@ -51,7 +51,11 @@ Install **mpl** with your favorite of the methods below, or read the
 [docs](https://boldandbrad.github.io/mpl/) for more info. Then run
 `mpl --version` to verify installation.
 
-### Install via [Homebrew](https://brew.sh) 🍺 (macOS/Linux) ❌
+**Jump to:** [Homebrew](#install-homebrew) | [Scoop](#install-scoop) |
+[Cargo](#install-cargo) | [Remote](#install-remote) |
+[GitHub Release](#install-release) | [Source](#install-source)
+
+### Install via [Homebrew](https://brew.sh) 🍺 (macOS/Linux) ❌ <a id="install-homebrew"></a>
 
 1. Add tap:
 
@@ -62,10 +66,10 @@ Install **mpl** with your favorite of the methods below, or read the
 1. Install formula:
 
     ```sh
-    brew install mpl
+    brew install mpl-cli
     ```
 
-### Install via [Scoop](https://scoop.sh) 🍦 (Windows) ❌
+### Install via [Scoop](https://scoop.sh) 🍦 (Windows) ❌ <a id="install-scoop"></a>
 
 1. Add bucket:
 
@@ -76,18 +80,18 @@ Install **mpl** with your favorite of the methods below, or read the
 1. Install manifest:
 
     ```sh
-    scoop install boldandbrad_scoop-bucket/mpl
+    scoop install boldandbrad_scoop-bucket/mpl-cli
     ```
 
-### Install via [Cargo](https://crates.io) 📦 🚧
+### Install via [Cargo](https://crates.io) 📦 🚧 <a id="install-cargo"></a>
 
 - Install crate:
 
   ```sh
-  cargo install mpl
+  cargo install mpl-cli
   ```
 
-### Install via remote install script 📜 ❌
+### Install via remote install script 📜 ❌ <a id="install-remote"></a>
 
 > [!NOTE]
 > The [remote install script](scripts/install.sh) explains what it will do and
@@ -99,13 +103,13 @@ Install **mpl** with your favorite of the methods below, or read the
   curl -LSfs https://raw.githubusercontent.com/boldandbrad/mpl-cli/main/ci/install.sh | sh -s -- --git boldandbrad/mpl-cli
   ```
 
-### Manual install from GitHub Release ⬇️ 🚧
+### Manual install from GitHub Release ⬇️ 🚧 <a id="install-release"></a>
 
 1. Download the [latest GitHub Release](https://github.com/boldandbrad/mpl-cli/releases)
    for your platform
 2. Extract contents and install to a location in your `$PATH`
 
-### Manual install from source 👩‍💻 🚧
+### Manual install from source 👩‍💻 🚧 <a id="install-source"></a>
 
 1. Install [Rust](https://www.rust-lang.org/tools/install)
 2. Run `git clone https://github.com/boldandbrad/mpl-cli` and `cd mpl-cli`

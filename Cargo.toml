@@ -1,5 +1,5 @@
 [package]
-name = "mpl"
+name = "mpl-cli"
 version = "0.1.0"
 edition = "2021"
 authors = ["boldandbrad"]
@@ -16,3 +16,7 @@ semver = "1.0.20"
 serde = { version = "1.0.189", features = ["derive"] }
 serde_yaml = "0.9.25"
 whoami = "1.4.1"
+
+[[bin]]
+name = "mpl"
+path = "src/main.rs"

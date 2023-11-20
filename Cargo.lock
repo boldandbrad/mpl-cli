@@ -647,7 +647,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "mpl"
+name = "mpl-cli"
 version = "0.1.0"
 dependencies = [
  "chrono",
