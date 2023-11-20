@@ -1,4 +1,5 @@
-*This is a reimagination and reimplementation of my other project [meeple-cli](https://github.com/boldandbrad/meeple-cli).*
+*This is a reimagination and reimplementation of my other project
+[meeple-cli](https://github.com/boldandbrad/meeple-cli).*
 
 ---
 
@@ -9,19 +10,23 @@
 > **mpl**; short for **meeple** [`/mipel/`] *noun* -  a board game player
 > token. (E.g., <picture><source media="(prefers-color-scheme: dark)" srcset="assets/meeple-light.svg"><source media="(prefers-color-scheme: light)" srcset="assets/meeple-dark.svg"><img src="" style="vertical-align:top;" alt="meeple icon" width="24"></picture>)
 
-`mpl` is a local board game collection management CLI tool built in rust and
+**mpl** is a local board game collection management CLI tool built in rust and
 powered by [BoardGameGeek](https://boardgamegeek.com) (BGG) public APIs.
 
-**Jump to:** [Features](#features) | [Installation](#install) | [Usage](#usage) | [Configuration](#config) | [Resources](#resources) | [Legal](#legal) | [Documentation](https://boldandbrad.github.io/mpl/) 🔗
+**Jump to:** [Features](#features) | [Installation](#install) | [Usage](#usage)
+| [Configuration](#config) | [Resources](#resources) | [Legal](#legal) |
+[Documentation](https://boldandbrad.github.io/mpl/) 🔗
 
 > [!WARNING]<br>
-> `mpl` is currently in **ALPHA**. This means it is generally unstable and may be missing key features.
-> Please track the progress of features throughout this README with the following symbols:
-> | Symbol    | Status            |
-> | -         | -                 |
-> | ✅        | Implemented       |
-> | 🚧        | Work in Progress  |
-> | ❌        | Not Started       |
+> **mpl** is currently in **ALPHA**. This means it is generally unstable and may
+> be missing key features. Please track the progress of features throughout this
+> README with the following symbols:
+> | Symbol    | Status                    |
+> | -         | -                         |
+> | ✅        | Implemented - stable      |
+> | ✳️        | Implemented - unstable    |
+> | 🚧        | Work in Progress          |
+> | ❌        | Not Started               |
 
 ## 🎥 Demo
 
@@ -30,36 +35,63 @@ powered by [BoardGameGeek](https://boardgamegeek.com) (BGG) public APIs.
 ## ✨ Features <a id="features"></a>
 
 - Get started quickly with BGG user collection import
-- Discover new titles via BGG Hotness, new releases, active crowdfunding campaigns, and BGG search
-- Search and open Geek Market listings
-- Add titles to local stashes
-- Stats...
+- Discover new titles via BGG Hotness, new releases, active crowdfunding
+  campaigns, and BGG search
+- Grow your collection by searching and opening Geek Market listings
+- Flexible local stash maintainance and customization
 - Powerful cross-stash search to find the best title for game night
 - Create and manage personal ratings
 - Log and view game playthroughs
 - Multiple user support with profiles
+- Written in Rust 🦀
 
 ## 📦 Installation <a id="install"></a>
 
-Via [Homebrew](https://brew.sh) (macOS/Linux) ❌
+Install **mpl** with your favorite of the methods below, or read the
+[docs](https://boldandbrad.github.io/mpl/) for more info. Then run
+`mpl --version` to verify installation.
+
+### Install via [Homebrew](https://brew.sh) 🍺 (macOS/Linux) ❌
 
 ```sh
 brew tap boldandbrad/tap
 brew install mpl
 ```
 
-Via [Scoop](https://scoop.sh) (Windows) ❌
+### Install via [Scoop](https://scoop.sh) 🍦 (Windows) ❌
 
 ```sh
 scoop bucket add boldandbrad_scoop-bucket https://github.com/boldandbrad/scoop-bucket
 scoop install boldandbrad_scoop-bucket/mpl
 ```
 
-Via Cargo 🚧
+### Install via [Cargo](https://crates.io) 📦 🚧
 
 ```sh
 cargo install mpl
 ```
+
+### Install via remote install script 📜 ❌
+
+> The [remote install script](scripts/install.sh) explains what it will do and
+> prompts before doing so.
+
+```sh
+curl -LSfs https://raw.githubusercontent.com/boldandbrad/mpl-cli/main/ci/install.sh | sh -s -- --git boldandbrad/mpl-cli
+```
+
+### Manual install from GitHub Release ⬇️ 🚧
+
+1. Download the [latest GitHub Release](https://github.com/boldandbrad/mpl-cli/releases)
+   for your platform
+2. Extract contents and install to a location in your `$PATH`
+
+### Manual install from source 👩‍💻 🚧
+
+1. Install [Rust](https://www.rust-lang.org/tools/install)
+2. Run `git clone https://github.com/boldandbrad/mpl-cli` and `cd mpl-cli`
+3. Run `cargo install --path .`
+4. Ensure `~/.cargo/bin` is in your `$PATH`
 
 ## 🚀 Usage <a id="usage"></a>
 
@@ -67,23 +99,27 @@ cargo install mpl
 mpl
 ```
 
-To get you started, on first run `mpl` creates a default profile with the same name as your user home directory (you can rename it later if you prefer with `mpl profile rename`), containing a stash called `collection`.
+To get you started, on first run `mpl` creates a default profile with the same
+name as your user home directory (you can rename it later if you prefer with
+`mpl profile rename`), containing a stash called `collection`.
 
-### 🚢 Import BGG user collections
+### Import BGG user collections 🚢
 
 ```sh
 mpl bgg import --user=boldandbrad
 ```
 
-mpl will guide you through the import process. When done, see your imported collections:
+`mpl` will guide you through the import process. When done, see your imported
+collections:
 
 ```sh
 mpl stash list --verbose
 ```
 
-### 🧼 Start fresh
+### Start fresh 🧼
 
-`mpl` relies on BoardGameGeek item IDs to manage the titles you add to your stashes. The easiest way to get these is by searching BoardGameGeek:
+`mpl` relies on BoardGameGeek item IDs to manage the titles you add to your
+stashes. The easiest way to get these is by searching BoardGameGeek:
 
 ```sh
 mpl bgg search "wingspan"
@@ -103,11 +139,15 @@ Now let's see what's in your collection:
 mpl titles -s=collection
 ```
 
-Run `mpl --help` to discover what else you can do with mpl!
+Run `mpl --help` or read the [docs](https://boldandbrad.github.io/mpl/) to
+discover what to do next!
 
-### Commands
+### Command Reference 📖
 
-#### Top Level 🚧
+> [!TIP]<br>
+> You can discover **mpl** commands and options with `mpl --help`.
+
+#### Root 🚧
 
 - `mpl add` 🚧 - add titles to a stash
 - `mpl drop` 🚧 - drop titles from a stash
@@ -168,8 +208,10 @@ Manage configurations.
 
 ##### Flags/Options
 
-- `-g`/`--global` ❌ - action applies to global options. When not present, the action applies to the active profile options.
-- `-F`/`--force` ❌ - used in combination with `-g`, changes default config value for all profiles with overwrite of profile values
+- `-g`/`--global` ❌ - action applies to global options. When not present, the
+  action applies to the active profile options.
+- `-F`/`--force` ❌ - used in combination with `-g`, changes default config
+  value for all profiles with overwrite of profile values
 
 ##### Commands
 
@@ -207,7 +249,8 @@ Log and manage title plays.
 
 mpl respects the following env variables:
 
-- `MPL_HOME`/`XDG_CONFIG_HOME` - change where `.mpl/` is stored. Default: `~/.mpl/`
+- `MPL_HOME`/`XDG_CONFIG_HOME` - change where `.mpl/` is stored. Default:
+  `~/.mpl/`
 
 ### Config options
 
@@ -216,23 +259,29 @@ These options can be managed with `mpl config`.
 > Global configs are stored in `.mpl/config.toml`.
 > Profile level configs are stored in `.mpl/<PROFILE>/config.toml`
 
-- `update_on_change` - automatically pass `--update` to add/drop operations. Default `false`
-- `default_stash` - the default stash to perform add/drop operations on. Default `collection`
+- `update_on_change` - automatically pass `--update` to add/drop operations.
+  Default `false`
+- `default_stash` - the default stash to perform add/drop operations on. Default
+  `collection`
 
 ### Completions
 
-> Coming soon.
+**mpl** supports tab completions for `bash`, `zsh`, and `fish`. For
+setup, run `mpl config completions <SHELL>`.
 
 ## 📚 Resources <a id="resources"></a>
 
-- [Changelog](docs/changelog.md) - See a history of implemented features/changes.
-- [Roadmap](https://github.com/boldandbrad/mpl-cli/milestones) - See a list of planned features and milestones.
+- [Changelog](docs/changelog.md) - See a history of implemented
+  features/changes.
+- [Roadmap](https://github.com/boldandbrad/mpl-cli/milestones) - See a list of
+  planned features and milestones.
 - [FAQ](docs/faq.md) - Find answers to common questions.
 - [Contributor Guide](docs/contributing.md) ❌ - Find out how to get involved.
 
 ## ⚖️ Legal <a id="legal"></a>
 
-> Disclaimer: Neither `mpl-cli` nor its maintainers are affiliated with
+> [!NOTE]<br>
+> Neither `mpl` nor its maintainers are affiliated with
 > [BoardGameGeek](https://boardgamegeek.com).
 
 Copyright (c) 2023 Bradley Wojcik. Released under the MIT License. See
