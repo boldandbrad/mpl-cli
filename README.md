@@ -1,4 +1,4 @@
-*🚨 This is a reimagination and reimplementation of my other project [meeple-cli](https://github.com/boldandbrad/meeple-cli).*
+*This is a reimagination and reimplementation of my other project [meeple-cli](https://github.com/boldandbrad/meeple-cli).*
 
 ---
 
@@ -14,7 +14,7 @@
 `mpl` is a local board game collection management CLI tool built in rust and
 powered by [BoardGameGeek](https://boardgamegeek.com) (BGG) public APIs.
 
-**Jump to:** [Features](#✨-features) | [Installation](#📦-installation) | [Usage](#🚀-usage) | [Configuration](#⚙️-configuration) | [Resources](#📚-resources) | [Documentation 🔗](https://boldandbrad.github.io/mpl/)
+**Jump to:** [Features](#features) | [Installation](#📦-installation) | [Usage](#🚀-usage) | [Configuration](#⚙️-configuration) | [Resources](#📚-resources) | [Documentation 🔗](https://boldandbrad.github.io/mpl/)
 
 > [!WARNING] <br>
 > `mpl` is currently in **ALPHA**. This means it is generally unstable and may be missing key features.
@@ -29,7 +29,7 @@ powered by [BoardGameGeek](https://boardgamegeek.com) (BGG) public APIs.
 
 > Coming soon.
 
-## ✨ Features
+## ✨ Features <a id="features"></a>
 
 - Get started quickly with BGG user collection import
 - Discover new titles via BGG Hotness, new releases, active crowdfunding campaigns, and BGG search
@@ -234,7 +234,7 @@ These options can be managed with `mpl config`.
 
 ## ⚖️ Legal
 
-> ⚠️ Disclaimer: Neither `mpl-cli` nor its maintainers are affiliated with
+> Disclaimer: Neither `mpl-cli` nor its maintainers are affiliated with
 > [BoardGameGeek](https://boardgamegeek.com).
 
 Copyright (c) 2023 Bradley Wojcik. Released under the MIT License. See
