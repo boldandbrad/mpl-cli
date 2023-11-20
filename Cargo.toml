@@ -6,7 +6,6 @@ authors = ["boldandbrad"]
 description = "Manage local board game stashes and interact with BoardGameGeek from your terminal."
 repository = "https://github.com/boldandbrad/mpl-cli"
 license = "MIT"
-license-file = "LICENSE"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
