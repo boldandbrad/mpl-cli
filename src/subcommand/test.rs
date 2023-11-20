@@ -22,8 +22,7 @@ pub fn test() {
     // let fpath: String = fbuf.clone().into_os_string().into_string().unwrap();
     // println!("{fpath}");
     // let _result = test_write(fpath);
-    let mut bgg_ids = Vec::new();
-    bgg_ids.push("123456".to_string());
+    let bgg_ids = vec!["123456".to_string()];
     let response = get_items(bgg_ids);
     println!("{:?}", response);
 }

@@ -10,9 +10,8 @@ use cli::{
 use util::fs::check_fs;
 
 fn main() {
-    let cli_app = Mpl::parse();
-
     check_fs();
+    let cli_app = Mpl::parse();
     match cli_app.subcommand {
         // TODO: remove test command
         SubCommands::Test {} => {

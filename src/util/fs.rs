@@ -1,12 +1,20 @@
 use std::env;
-use std::path::PathBuf;
+use std::path::{Path, PathBuf};
 
-static PROFILES_DIR: &str = "profiles";
-static DEFAULT_PROFILE: &str = "default";
+static PROFILES_DIR_NAME: &str = "profiles";
+static PROFILE_STASH_DIR_NAME: &str = "stash";
+
+static STASH_DATA_DIR_NAME: &str = "data";
+
+static DEFAULT_STASH_NAME: &str = "collection";
+
+fn get_system_user() -> String {
+    whoami::username()
+}
 
 pub fn get_mpl_dir() -> PathBuf {
     let mpl_root_dir: String = ".mplrs".to_string();
-    let user: String = whoami::username();
+    let user: String = get_system_user();
     let os: &str = env::consts::OS;
     match os {
         "macos" => PathBuf::from(format!("/Users/{}/{}", user, mpl_root_dir)),
@@ -25,42 +33,50 @@ pub fn get_mpl_state_file() -> PathBuf {
     return get_mpl_dir().join("state.yml");
 }
 
-pub fn create_dirs(dir_pathbuf: &PathBuf) -> std::io::Result<()> {
-    let dir_path: String = dir_pathbuf.clone().into_os_string().into_string().unwrap();
+pub fn create_dirs(dir_path: &Path) -> std::io::Result<()> {
     std::fs::create_dir_all(dir_path)?;
     Ok(())
 }
 
-pub fn create_profile_dir(profile_name: String) {
-    check_fs()
+pub fn create_profile_dir(profile_name: &String) {
+    let profiles_dir: PathBuf = get_mpl_dir().join(PROFILES_DIR_NAME);
+    let _ = create_dirs(&profiles_dir.join(profile_name));
+}
+
+pub fn create_profile_stash_dir(profile_name: &String, stash_name: &String) {
+    // create stash dir
+    let profiles_dir: PathBuf = get_mpl_dir().join(PROFILES_DIR_NAME);
+    let profile_stash_dir: PathBuf = profiles_dir
+        .clone()
+        .join(profile_name)
+        .join(PROFILE_STASH_DIR_NAME)
+        .join(stash_name);
+    let _ = create_dirs(&profile_stash_dir);
+
+    // create stash sub dirs
+    let _ = create_dirs(&profile_stash_dir.clone().join(STASH_DATA_DIR_NAME));
 }
 
 pub fn check_fs() {
     // create mpl dir if it does not exist
-    let mpl_pb: PathBuf = get_mpl_dir();
-    let _ = create_dirs(&mpl_pb);
+    let mpl_dir: PathBuf = get_mpl_dir();
+    let _ = create_dirs(&mpl_dir);
 
     // create profiles dir if it does not exist
-    let profile_pb: PathBuf = mpl_pb.clone().join(PROFILES_DIR);
-    let _ = create_dirs(&profile_pb);
+    let profiles_dir: PathBuf = mpl_dir.clone().join(PROFILES_DIR_NAME);
+    let _ = create_dirs(&profiles_dir);
 
-    // TODO: check if any profiles exist, if not, create the default profile
-    // let is_empty = profile_pb
-    //     .read_dir()
-    //     .map(|mut i| i.next().is_none())
-    //     .unwrap_or(false);
-
-    let is_empty = profile_pb.read_dir().unwrap();
-
-    println!("{:?}", is_empty);
-
-    // create default profile dir if it does not exist
-    // let default_profile_pb: PathBuf = profile_pb.clone().join(DEFAULT_PROFILE);
-    // let _ = create_dirs(&default_profile_pb);
-
-    // create stash sub dirs if they do not exist
-    // let col_data_pathbuf: PathBuf = col_pathbuf.clone().join("data");
-    // let _ = create_dirs(&col_data_pathbuf);
-    // let col_state_pathbuf: PathBuf = col_pathbuf.clone().join("state");
-    // let _ = create_dirs(&col_state_pathbuf);
+    // create default profile dir if no profiles exist
+    let profile_dirs: Vec<PathBuf> = std::fs::read_dir(&profiles_dir)
+        .unwrap()
+        .into_iter()
+        .filter(|r| r.is_ok())
+        .map(|r| r.unwrap().path())
+        .filter(|r| r.is_dir())
+        .collect();
+    if profile_dirs.len() == 0 {
+        let default_profile_name = get_system_user();
+        create_profile_dir(&default_profile_name);
+        create_profile_stash_dir(&default_profile_name, &DEFAULT_STASH_NAME.to_string());
+    }
 }

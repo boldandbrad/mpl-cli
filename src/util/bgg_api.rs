@@ -33,7 +33,7 @@ fn api_get(
             s => {
                 // unknown api response
                 let err_msg = format!("Unknown API Response ({:?}) - {:?}", s, response.text());
-                return Err(String::from(err_msg).into());
+                return Err(err_msg.into());
             }
         }
     }
