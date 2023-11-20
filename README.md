@@ -91,7 +91,8 @@ Install **mpl** with your favorite of the methods below, or read the
 
 - Run script:
 
-  > [!NOTE] The [remote install script](scripts/install.sh) explains what it will do and
+  > [!NOTE]
+  > The [remote install script](scripts/install.sh) explains what it will do and
   > prompts before doing so.
 
   ```sh
