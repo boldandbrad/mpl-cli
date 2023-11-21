@@ -207,14 +207,14 @@ Perform BoardGameGeek related actions.
 - `mpl bgg search` 🚧 - search boardgamegeek for titles
   - Flag `--market` ❌ - search geek market listings
 - `mpl bgg info` 🚧 - view title details
-- `mpl bgg open` ❌ - open boardgamegeek.com
+- `mpl bgg open` ❌ - open links in the web browser
   - Option `--title` - open a title's boardgamegeek page(s)
   - Option `--campaign` - open a title's crowdfunding campaign page
   - Option `--listing` - open a geek market listing
-- `mpl bgg import` ❌ - import bgg collections
+- `mpl bgg import` ❌ - import bgg user collections
 - `mpl bgg hotness` ❌ - view bgg hotness list
 - `mpl bgg campaigns` ❌ - list active crowdfunding campaigns
-- `mpl bgg releases` ❌ - list recent releases
+- `mpl bgg releases` ❌ - list recent title releases
 
 #### Profiles 🚧
 

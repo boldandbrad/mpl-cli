@@ -37,8 +37,23 @@ fn main() {
 
         // bgg commands
         SubCommands::Bgg { subcommand } => match subcommand {
+            BggSubCommands::Campaigns {} => {
+                subcommand::bgg::campaigns();
+            }
+            BggSubCommands::Hotness {} => {
+                subcommand::bgg::hotness();
+            }
+            BggSubCommands::Import {} => {
+                subcommand::bgg::import();
+            }
             BggSubCommands::Info { bgg_id } => {
                 subcommand::bgg::info(bgg_id);
+            }
+            BggSubCommands::Open {} => {
+                subcommand::bgg::open();
+            }
+            BggSubCommands::Releases {} => {
+                subcommand::bgg::releases();
             }
             BggSubCommands::Search { query } => {
                 subcommand::bgg::search(query);
@@ -58,9 +73,11 @@ fn main() {
                 // TODO: implement
                 subcommand::profile::active();
             }
-            ProfileSubCommands::Create {} => {
-                // TODO: implement
-                subcommand::profile::create();
+            ProfileSubCommands::Create {
+                profile_name,
+                active,
+            } => {
+                subcommand::profile::create(profile_name, active);
             }
             ProfileSubCommands::Delete {} => {
                 // TODO: implement
@@ -81,15 +98,27 @@ fn main() {
         },
 
         // stash commands
-        SubCommands::Stash { subcommand } => match subcommand {
+        SubCommands::Stash {
+            subcommand,
+            profile,
+        } => match subcommand {
             StashSubCommands::Create { stash_names } => {
-                subcommand::stash::create(stash_names);
+                subcommand::stash::create(stash_names, profile);
             }
             StashSubCommands::Delete { stash_names, force } => {
                 subcommand::stash::delete(stash_names, force);
             }
+            StashSubCommands::Info {} => {
+                subcommand::stash::info();
+            }
             StashSubCommands::List {} => {
                 subcommand::stash::list();
+            }
+            StashSubCommands::Move {} => {
+                subcommand::stash::move_();
+            }
+            StashSubCommands::Rename {} => {
+                subcommand::stash::rename();
             }
         },
     }

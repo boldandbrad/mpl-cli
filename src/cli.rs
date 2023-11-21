@@ -57,6 +57,10 @@ pub enum SubCommands {
     Stash {
         #[clap(subcommand)]
         subcommand: StashSubCommands,
+        #[clap(long, short = 'p')]
+        #[clap(action = ArgAction::SetTrue)]
+        /// The profile to perform actions in (Default: active profile)
+        profile: Option<bool>,
     },
     /// Test command
     Test {},
@@ -64,11 +68,21 @@ pub enum SubCommands {
 
 #[derive(Subcommand)]
 pub enum BggSubCommands {
+    /// List active crowdfunding campaigns
+    Campaigns {},
+    /// View BGG hotness list
+    Hotness {},
+    /// Import BGG user collections
+    Import {},
     /// Retrieve item details
     Info {
         /// BoardGameGeek item id
         bgg_id: String,
     },
+    /// Open links in the web browser
+    Open {},
+    /// List recent title releases
+    Releases {},
     /// Search BoardGameGeek items
     Search {
         /// BoardGameGeek search key. If searching multiple words, surround with quotes.
@@ -92,8 +106,14 @@ pub enum StashSubCommands {
         /// Force delete without confirmation
         force: Option<bool>,
     },
-    /// List all stashes
+    /// View details of a stash
+    Info {},
+    /// List existing stashes
     List {},
+    /// Move stashes to another profile
+    Move {},
+    /// Rename an existing stash
+    Rename {},
 }
 
 #[derive(Subcommand)]
@@ -111,7 +131,14 @@ pub enum ProfileSubCommands {
     /// Display the active profile
     Active {},
     /// Create new profiles
-    Create {},
+    Create {
+        /// The name of the profile to create
+        profile_name: String,
+        #[clap(long)]
+        #[clap(action = ArgAction::SetTrue)]
+        /// Make the new profile active
+        active: Option<bool>,
+    },
     /// Delete existing profiles
     Delete {},
     /// List existing profiles

@@ -52,7 +52,11 @@ pub fn create_dirs(dir_path: &Path) {
 
 pub fn create_profile_dir(profile_name: &String) {
     let profiles_dir: PathBuf = get_mpl_dir().join(PROFILES_DIR_NAME);
+    // create profile dir
     create_dirs(&profiles_dir.join(profile_name));
+    // create profile stashes dir and default stash
+    create_profile_stash_dir(&profile_name, &DEFAULT_STASH_NAME.to_string());
+    // TODO: create profile config file
 }
 
 // pub fn write_toml(file_path: &Path, )
@@ -108,6 +112,5 @@ pub fn check_fs() {
     if profile_dirs.is_empty() {
         let default_profile_name = get_system_user();
         create_profile_dir(&default_profile_name);
-        create_profile_stash_dir(&default_profile_name, &DEFAULT_STASH_NAME.to_string());
     }
 }
