@@ -192,7 +192,7 @@ Manage local stashes in the active profile.
 
 ##### Commands
 
-- `mpl stash create` 🚧 - create new stashes
+- `mpl stash create` ✳️ - create new stashes
 - `mpl stash delete` 🚧 - delete existing stashes
 - `mpl stash list` 🚧 - list existing stashes
   - `-v`/`--verbose` ❌ - list stats for stashes
@@ -221,11 +221,11 @@ Perform BoardGameGeek related actions.
 Manage user profiles.
 
 - `mpl profile active` 🚧 - display current profile
-- `mpl profile create` ❌ - create new profile
-- `mpl profile delete` ❌ - delete existing profile
+- `mpl profile create` 🚧 - create new profile
+- `mpl profile delete` 🚧 - delete existing profile
 - `mpl profile list` 🚧 - list existing profiles
 - `mpl profile rename` ❌ - rename existing profile
-- `mpl profile switch` ❌ - switch active profile
+- `mpl profile switch` 🚧 - switch active profile
 
 #### Config 🚧
 
