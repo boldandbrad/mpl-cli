@@ -1,6 +1,6 @@
 [package]
 name = "mpl-cli"
-version = "0.1.0-alpha.1"
+version = "0.1.0-alpha.2"
 edition = "2021"
 authors = ["boldandbrad"]
 description = "Manage local board game stashes and interact with BoardGameGeek from your terminal."
