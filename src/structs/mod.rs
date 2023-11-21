@@ -1,3 +1,6 @@
+pub mod mpl_config;
+pub use mpl_config::MplConfig;
+
 pub mod mpl_state;
 pub use mpl_state::MplState;
 

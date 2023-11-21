@@ -38,7 +38,7 @@ pub enum SubCommands {
     },
     /// List titles in stashes
     Titles {},
-    /// Perform BoardGameGeek actions
+    /// Perform BoardGameGeek related actions
     Bgg {
         #[clap(subcommand)]
         subcommand: BggSubCommands,
@@ -48,12 +48,12 @@ pub enum SubCommands {
         #[clap(subcommand)]
         subcommand: ConfigSubCommands,
     },
-    /// Manage profiles
+    /// Manage user profiles
     Profile {
         #[clap(subcommand)]
         subcommand: ProfileSubCommands,
     },
-    /// Manage stashes
+    /// Manage local stashes in the active profile
     Stash {
         #[clap(subcommand)]
         subcommand: StashSubCommands,
@@ -108,6 +108,16 @@ pub enum ConfigSubCommands {
 
 #[derive(Subcommand)]
 pub enum ProfileSubCommands {
-    /// display active profile
+    /// Display the active profile
     Active {},
+    /// Create new profiles
+    Create {},
+    /// Delete existing profiles
+    Delete {},
+    /// List existing profiles
+    List {},
+    /// Rename an existing profile
+    Rename {},
+    /// Switch the active profile
+    Switch {},
 }

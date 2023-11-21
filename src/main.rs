@@ -55,7 +55,28 @@ fn main() {
         // profile commands
         SubCommands::Profile { subcommand } => match subcommand {
             ProfileSubCommands::Active {} => {
+                // TODO: implement
                 subcommand::profile::active();
+            }
+            ProfileSubCommands::Create {} => {
+                // TODO: implement
+                subcommand::profile::create();
+            }
+            ProfileSubCommands::Delete {} => {
+                // TODO: implement
+                subcommand::profile::delete();
+            }
+            ProfileSubCommands::List {} => {
+                // TODO: implement
+                subcommand::profile::list();
+            }
+            ProfileSubCommands::Rename {} => {
+                // TODO: implement
+                subcommand::profile::rename();
+            }
+            ProfileSubCommands::Switch {} => {
+                // TODO: implement
+                subcommand::profile::switch();
             }
         },
 

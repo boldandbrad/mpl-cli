@@ -202,7 +202,7 @@ Manage local stashes in the active profile.
 
 #### BoardGameGeek 🚧
 
-BoardGameGeek specific actions.
+Perform BoardGameGeek related actions.
 
 - `mpl bgg search` 🚧 - search boardgamegeek for titles
   - Flag `--market` ❌ - search geek market listings
