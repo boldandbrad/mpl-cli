@@ -3,14 +3,12 @@ use std::path::{Path, PathBuf};
 
 use crate::structs::{Config, GlobalState};
 
-use super::{get_default_config, get_mpl_default_state};
-
 static MPL_ROOT_DIR_NAME: &str = ".mplrs";
 
 static PROFILES_DIR_NAME: &str = "profiles";
 static PROFILE_STASH_DIR_NAME: &str = "stashes";
 
-static STASH_DATA_DIR_NAME: &str = "data";
+static STASH_STATE_DIR_NAME: &str = "state";
 
 static DEFAULT_STASH_NAME: &str = "collection";
 
@@ -61,7 +59,7 @@ pub fn create_profile_stash_dir(profile_name: &String, stash_name: &String) {
     create_dirs(&profile_stash_dir);
 
     // create stash sub dirs
-    create_dirs(&profile_stash_dir.clone().join(STASH_DATA_DIR_NAME));
+    create_dirs(&profile_stash_dir.clone().join(STASH_STATE_DIR_NAME));
 }
 
 pub fn create_profile_dir(profile_name: &String) {
@@ -69,9 +67,14 @@ pub fn create_profile_dir(profile_name: &String) {
     // create profile dir
     create_dirs(&profiles_dir.join(profile_name));
     // create profile stashes dir and default stash
-    create_profile_stash_dir(&profile_name, &DEFAULT_STASH_NAME.to_string());
+    create_profile_stash_dir(profile_name, &DEFAULT_STASH_NAME.to_string());
     // TODO: create profile config file
+    // write_toml(get_default_config()
 }
+
+// pub fn get_profile_config(profile_name: &String) -> Config {
+//     let toml_string = read_toml(file_path);
+// }
 
 // pub fn write_toml(file_path: &Path, )
 
@@ -111,10 +114,10 @@ pub fn check_fs() {
 
     // create global config and state files if they do not exist
     if !get_mpl_config_file().exists() {
-        write_mpl_config(get_default_config());
+        write_mpl_config(Config::default());
     }
     if !get_mpl_state_file().exists() {
-        write_mpl_state(get_mpl_default_state());
+        write_mpl_state(GlobalState::default());
     }
 
     // create profiles dir if it does not exist

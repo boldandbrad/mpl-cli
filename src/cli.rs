@@ -1,8 +1,7 @@
 #![deny(missing_docs)]
 
-use clap::{ArgAction, Parser, Subcommand, ValueHint};
+use clap::{ArgAction, Parser, Subcommand};
 use clap_complete::Shell;
-use std::path::PathBuf;
 
 #[derive(Parser)]
 #[clap(author, version, about)]
@@ -54,8 +53,6 @@ pub enum SubCommands {
         /// The profile to perform actions in (Default: active profile)
         profile: Option<String>,
     },
-    /// Test command
-    Test {},
 }
 
 #[derive(Subcommand)]

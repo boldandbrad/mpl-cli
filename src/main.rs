@@ -13,12 +13,7 @@ fn main() {
     check_fs();
     let cli_app = Mpl::parse();
     match cli_app.subcommand {
-        // TODO: remove test command
-        SubCommands::Test {} => {
-            subcommand::test::test();
-        }
-
-        // top level commands
+        // root commands
         SubCommands::Add {
             stash_name,
             bgg_ids,

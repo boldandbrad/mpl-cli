@@ -1,24 +1,26 @@
-use super::Title;
+// use super::Title;
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Stash {
     pub name: String,
     pub state: StashState,
-    pub data: StashData,
 }
 
-impl Stash {}
+impl Stash {
+    // pub fn get_current_state() -> StashState {}
+
+    // pub fn get_previous_state() -> StashState {}
+
+    // pub fn get_state_by_date() -> StashState {}
+}
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct StashState {
-    pub active_ids: Vec<u32>,
-    pub to_add_ids: Vec<u32>,
-    pub to_drop_ids: Vec<u32>,
+    pub timestamp: String,
+    pub title_ids: Vec<u32>,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
-pub struct StashData {
-    pub updated_date: String,
-    pub items: Vec<Title>,
+impl StashState {
+    // pub fn get_titles() -> Vec<Title> {}
 }

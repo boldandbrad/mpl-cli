@@ -1,7 +1,7 @@
-use crate::util::get_mpl_state;
+use crate::structs::{GlobalState, Profile};
 
 pub fn active() {
-    let mpl_state = get_mpl_state();
-    let active_profile = mpl_state.active_profile;
-    println!("{}", active_profile);
+    // load active profile
+    let active_profile = Profile::load(GlobalState::load().active_profile);
+    println!("{}", active_profile.name);
 }
