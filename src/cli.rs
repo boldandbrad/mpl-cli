@@ -11,13 +11,6 @@ use std::path::PathBuf;
 pub struct Mpl {
     #[clap(subcommand)]
     pub subcommand: SubCommands,
-
-    #[clap(long, short)]
-    #[clap(value_hint(ValueHint::FilePath))]
-    /// Set the file to read the config from.
-    /// This does not change the `cache` and `tmp` directories.
-    /// You can also use the environment variable `CONFIG_FILE`.
-    pub config_file: Option<PathBuf>,
 }
 
 #[derive(Subcommand)]
@@ -58,9 +51,8 @@ pub enum SubCommands {
         #[clap(subcommand)]
         subcommand: StashSubCommands,
         #[clap(long, short = 'p')]
-        #[clap(action = ArgAction::SetTrue)]
         /// The profile to perform actions in (Default: active profile)
-        profile: Option<bool>,
+        profile: Option<String>,
     },
     /// Test command
     Test {},
@@ -140,11 +132,22 @@ pub enum ProfileSubCommands {
         active: Option<bool>,
     },
     /// Delete existing profiles
-    Delete {},
+    Delete {
+        /// The name of the profile to delete
+        profile_name: String,
+    },
     /// List existing profiles
     List {},
     /// Rename an existing profile
-    Rename {},
+    Rename {
+        /// The name of the profile to rename
+        profile_name: String,
+        /// The new name of the profile
+        new_name: String,
+    },
     /// Switch the active profile
-    Switch {},
+    Switch {
+        /// The name of the profile to switch to
+        profile_name: String,
+    },
 }

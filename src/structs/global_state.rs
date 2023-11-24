@@ -1,4 +1,6 @@
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Serialize, Deserialize)]
-pub struct MplConfig {}
+pub struct GlobalState {
+    pub active_profile: String,
+}

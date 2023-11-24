@@ -79,21 +79,24 @@ fn main() {
             } => {
                 subcommand::profile::create(profile_name, active);
             }
-            ProfileSubCommands::Delete {} => {
+            ProfileSubCommands::Delete { profile_name } => {
                 // TODO: implement
-                subcommand::profile::delete();
+                subcommand::profile::delete(profile_name);
             }
             ProfileSubCommands::List {} => {
                 // TODO: implement
                 subcommand::profile::list();
             }
-            ProfileSubCommands::Rename {} => {
+            ProfileSubCommands::Rename {
+                profile_name,
+                new_name,
+            } => {
                 // TODO: implement
-                subcommand::profile::rename();
+                subcommand::profile::rename(profile_name, new_name);
             }
-            ProfileSubCommands::Switch {} => {
+            ProfileSubCommands::Switch { profile_name } => {
                 // TODO: implement
-                subcommand::profile::switch();
+                subcommand::profile::switch(profile_name);
             }
         },
 

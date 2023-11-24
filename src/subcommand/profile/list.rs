@@ -1,4 +1,10 @@
+use crate::util::fs::get_profile_names;
+
 pub fn list() {
-    println!("List profiles");
-    println!("Not yet implemented.")
+    // TODO: mark active profile
+    // TODO: sort alphabetically
+    let profile_names = get_profile_names();
+    for name in profile_names {
+        println!("{}", name);
+    }
 }

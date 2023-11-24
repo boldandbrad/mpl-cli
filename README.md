@@ -220,12 +220,12 @@ Perform BoardGameGeek related actions.
 
 Manage user profiles.
 
-- `mpl profile active` 🚧 - display current profile
-- `mpl profile create` 🚧 - create new profile
-- `mpl profile delete` 🚧 - delete existing profile
-- `mpl profile list` 🚧 - list existing profiles
-- `mpl profile rename` ❌ - rename existing profile
-- `mpl profile switch` 🚧 - switch active profile
+- `mpl profile list` ✳️ - list all existing profiles
+- `mpl profile active` ✅ - display the current profile
+- `mpl profile switch` ✳️ - switch the active profile
+- `mpl profile create` ✳️ - create a new profile
+- `mpl profile delete` 🚧 - delete an existing profile
+- `mpl profile rename` ❌ - rename an existing profile
 
 #### Config 🚧
 
@@ -235,18 +235,23 @@ Manage configurations.
 
 ##### Flags/Options
 
-- `-g`/`--global` ❌ - action applies to global options. When not present, the
+- `-g`/`--global` ❌ - apply config actions to the global scope. When not present, the
   action applies to the active profile options.
+- `--show-scope` ❌ - augment output with the scope
 - `-F`/`--force` ❌ - used in combination with `-g`, changes default config
   value for all profiles with overwrite of profile values
 
 ##### Commands
 
-- `mpl config active` ❌ - display current configuration
-- `mpl config options` ❌ - show available config options
-- `mpl config set` ❌ - set option value
-- `mpl config unset` ❌ - revert option value to default
-- `mpl config complete` 🚧 - setup shell tab completions
+- `mpl config list` ❌ - list all config options and their current values
+  - `--name-only` ❌ - output only config option names
+- `mpl config get` ❌ - get the current value of the given config option
+  - `--default` ❌ - get the default value of the given config option
+  - `--all-values` ❌ - get all valid values of the given config option
+- `mpl config set` ❌ - set the value of the given config option
+- `mpl config unset` ❌ - revert the value of the given option to its default
+  - `-a`/`--all` ❌ - revert all option values to their default
+- `mpl config complete` 🚧 - setup tab-completions for the given shell
 
 #### Ratings ❌
 

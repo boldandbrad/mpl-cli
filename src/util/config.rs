@@ -1,7 +1,7 @@
-use crate::structs::MplConfig;
+use crate::structs::Config;
 
-pub fn get_default_config() -> MplConfig {
-    MplConfig {}
+pub fn get_default_config() -> Config {
+    Config {}
 }
 
 // pub fn get_config() {}

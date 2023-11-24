@@ -1,8 +1,8 @@
-pub mod mpl_config;
-pub use mpl_config::MplConfig;
+pub mod config;
+pub use config::Config;
 
-pub mod mpl_state;
-pub use mpl_state::MplState;
+pub mod global_state;
+pub use global_state::GlobalState;
 
 pub mod stash;
 pub use stash::{Stash, StashData, StashState};
