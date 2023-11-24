@@ -94,7 +94,7 @@ pub fn read_toml(file_path: &Path) -> String {
 
 pub fn get_profile_names() -> Vec<String> {
     let profiles_dir: PathBuf = get_mpl_dir().join(PROFILES_DIR_NAME);
-    let profile_paths: Vec<PathBuf> = std::fs::read_dir(&profiles_dir)
+    let profile_paths: Vec<PathBuf> = std::fs::read_dir(profiles_dir)
         .unwrap()
         .filter(|r| r.is_ok())
         .map(|r| r.unwrap().path())
