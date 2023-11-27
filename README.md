@@ -40,16 +40,16 @@ powered by [BoardGameGeek](https://boardgamegeek.com) (BGG) public APIs.
 
 ## ✨ Features <a id="features"></a>
 
-- Get started quickly with BGG user collection import
+- Get started quickly with BGG user collection import ❌
 - Discover new titles via BGG Hotness, new releases, active crowdfunding
-  campaigns, and BGG search
-- Grow your collection by searching and opening Geek Market listings
-- Flexible local stash maintainance and customization
-- Powerful cross-stash search to find the best title for game night
-- Create and manage personal ratings
-- Log and view game playthroughs
-- Multiple user support with profiles
-- Written in Rust 🦀
+  campaigns, and BGG search ❌
+- Grow your collection by searching and opening Geek Market listings ❌
+- Flexible local stash maintainance and customization 🚧
+- Powerful cross-stash search to find the best title for game night ❌
+- Create and manage personal ratings ❌
+- Log and view game playthroughs ❌
+- Multiple user support with profiles 🚧
+- Written in Rust 🦀 ✅
 
 ## 📦 Installation <a id="install"></a>
 
