@@ -199,6 +199,17 @@ discover what to do next!
 - `mpl move` ❌ - move titles to another stash
 - `mpl update` ❌ - update local stash data
 
+### Profiles 🚧
+
+Manage user profiles.
+
+- `mpl profile list` ✳️ - list all existing profiles
+- `mpl profile active` ✅ - display the current profile
+- `mpl profile switch` ✳️ - switch the active profile
+- `mpl profile create` ✳️ - create a new profile
+- `mpl profile delete` ✳️ - delete an existing profile
+- `mpl profile rename` ❌ - rename an existing profile
+
 ### Stashes 🚧
 
 Manage local stashes in the active profile.
@@ -233,17 +244,6 @@ Perform BoardGameGeek related actions.
 - `mpl bgg hotness` ❌ - view bgg hotness list
 - `mpl bgg campaigns` ❌ - list active crowdfunding campaigns
 - `mpl bgg releases` ❌ - list recent title releases
-
-### Profiles 🚧
-
-Manage user profiles.
-
-- `mpl profile list` ✳️ - list all existing profiles
-- `mpl profile active` ✅ - display the current profile
-- `mpl profile switch` ✳️ - switch the active profile
-- `mpl profile create` ✳️ - create a new profile
-- `mpl profile delete` ✳️ - delete an existing profile
-- `mpl profile rename` ❌ - rename an existing profile
 
 ### Config 🚧
 
