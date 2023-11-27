@@ -321,12 +321,12 @@ setup, run `mpl config completions <SHELL>`.
 
 ## 📚 Resources <a id="resources"></a>
 
-- [Changelog](docs/changelog.md) - See a history of implemented
+- [Changelog](docs/CHANGELOG.md) - See a history of implemented
   features/changes.
 - [Roadmap](https://github.com/boldandbrad/mpl-cli/milestones) - See a list of
   planned features and milestones.
 - [FAQ](docs/faq.md) - Find answers to common questions.
-- [Contributor Guide](docs/contributing.md) ❌ - Find out how to get involved.
+- [Contributor Guide](docs/CONTRIBUTING.md) ❌ - Find out how to get involved.
 
 ## ⚖️ Legal <a id="legal"></a>
 
