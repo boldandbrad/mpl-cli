@@ -13,8 +13,14 @@
 **mpl** is a local board game collection management CLI tool built in rust and
 powered by [BoardGameGeek](https://boardgamegeek.com) (BGG) public APIs.
 
-**Jump to:** [Features](#features) | [Installation](#install) | [Usage](#usage)
-| [Configuration](#config) | [Resources](#resources) | [Legal](#legal) |
+**Jump to:**
+[Features](#features) |
+[Installation](#install) |
+[Getting Started](#getting-started) |
+[Command Reference](#cmd-ref) |
+[Configuration](#config) |
+[Resources](#resources) |
+[Legal](#legal) |
 [Documentation](https://boldandbrad.github.io/mpl/) 🔗
 
 > [!WARNING]<br>
@@ -120,24 +126,35 @@ Install **mpl** with your favorite of the methods below, or read the
 3. Run `cargo install --path .`
 4. Ensure `~/.cargo/bin` or `$CARGO_HOME/bin` is in your `$PATH`
 
-## 🚀 Usage <a id="usage"></a>
+## 🚀 Getting Started <a id="getting-started"></a>
+
+Using **mpl** is as easy as:
 
 ```sh
 mpl
 ```
 
 To get you started, on first run `mpl` creates a default profile with the same
-name as your user home directory (you can rename it later if you prefer with
-`mpl profile rename`), containing a stash called `collection`.
+name as your user `$HOME` directory containing a stash called `collection`.
+
+> [!TIP]
+> If you prefer, you can rename these later with `mpl profile rename` and
+> `mpl stash rename` respectively.
 
 ### Import BGG user collections 🚢
+
+Initiate an import:
+
+> [!TIP]
+> Try it with `--dry-run` to *simulate* the import without actually making
+> changes.
 
 ```sh
 mpl bgg import --user=boldandbrad
 ```
 
-`mpl` will guide you through the import process. When done, see your imported
-collections:
+**mpl** will guide you through the import process. When done, see your imported
+stash(es):
 
 ```sh
 mpl stash list --verbose
@@ -169,12 +186,12 @@ mpl titles -s=collection
 Run `mpl --help` or read the [docs](https://boldandbrad.github.io/mpl/) to
 discover what to do next!
 
-### Command Reference 📖
+## 📖 Command Reference <a id="cmd-ref"></a>
 
 > [!TIP]<br>
 > You can discover **mpl** commands and options with `mpl --help`.
 
-#### Root 🚧
+### Root 🚧
 
 - `mpl add` 🚧 - add titles to a stash
 - `mpl drop` 🚧 - drop titles from a stash
@@ -182,15 +199,15 @@ discover what to do next!
 - `mpl move` ❌ - move titles to another stash
 - `mpl update` ❌ - update local stash data
 
-#### Stashes 🚧
+### Stashes 🚧
 
 Manage local stashes in the active profile.
 
-##### Flags/Options
+#### Flags/Options
 
 - `-p/--profile` - the profile to perform actions in (default: active profile)
 
-##### Commands
+#### Commands
 
 - `mpl stash create` ✳️ - create new stashes
 - `mpl stash delete` 🚧 - delete existing stashes
@@ -200,7 +217,7 @@ Manage local stashes in the active profile.
 - `mpl stash info` ❌ - view details of a stash
 - `mpl stash move` ❌ - move stashes to another profile
 
-#### BoardGameGeek 🚧
+### BoardGameGeek 🚧
 
 Perform BoardGameGeek related actions.
 
@@ -212,11 +229,12 @@ Perform BoardGameGeek related actions.
   - Option `--campaign` - open a title's crowdfunding campaign page
   - Option `--listing` - open a geek market listing
 - `mpl bgg import` ❌ - import bgg user collections
+  - Option `--dry-run` ❌ - simulate import without persisting changes
 - `mpl bgg hotness` ❌ - view bgg hotness list
 - `mpl bgg campaigns` ❌ - list active crowdfunding campaigns
 - `mpl bgg releases` ❌ - list recent title releases
 
-#### Profiles 🚧
+### Profiles 🚧
 
 Manage user profiles.
 
@@ -227,21 +245,21 @@ Manage user profiles.
 - `mpl profile delete` 🚧 - delete an existing profile
 - `mpl profile rename` ❌ - rename an existing profile
 
-#### Config 🚧
+### Config 🚧
 
 Manage configurations.
 
 > Profile level configs override global ones by default.
 
-##### Flags/Options
+#### Flags/Options
 
-- `-g`/`--global` ❌ - apply config actions to the global scope. When not present, the
-  action applies to the active profile options.
+- `-g`/`--global` ❌ - apply config actions to the global scope. When not
+  present, the action applies to the active profile options.
 - `--show-scope` ❌ - augment output with the scope
 - `-F`/`--force` ❌ - used in combination with `-g`, changes default config
   value for all profiles with overwrite of profile values
 
-##### Commands
+#### Commands
 
 - `mpl config list` ❌ - list all config options and their current values
   - `--name-only` ❌ - output only config option names
@@ -253,7 +271,7 @@ Manage configurations.
   - `-a`/`--all` ❌ - revert all option values to their default
 - `mpl config complete` 🚧 - setup tab-completions for the given shell
 
-#### Ratings ❌
+### Ratings ❌
 
 > Needs more thought and design.
 
@@ -263,7 +281,7 @@ Manage personal title ratings.
 - `mpl rating unrate` ❌ - unrate a title
 - `mpl rating tiers` ❌ - list rated titles in tiers
 
-#### Plays ❌
+### Plays ❌
 
 > Needs more thought and design.
 
