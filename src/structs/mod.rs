@@ -11,4 +11,4 @@ pub mod stash;
 pub use stash::{Stash, StashState};
 
 pub mod title;
-pub use title::Title;
+pub use title::{Title, TitleCredits, TitleStats, TitleType};

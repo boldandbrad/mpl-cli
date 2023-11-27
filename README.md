@@ -194,7 +194,7 @@ Manage local stashes in the active profile.
 
 - `mpl stash create` ✳️ - create new stashes
 - `mpl stash delete` 🚧 - delete existing stashes
-- `mpl stash list` 🚧 - list existing stashes
+- `mpl stash list` ✳️ - list existing stashes
   - `-v`/`--verbose` ❌ - list stats for stashes
 - `mpl stash rename` ❌ - rename an existing stash
 - `mpl stash info` ❌ - view details of a stash

@@ -1,18 +1,14 @@
 use std::env;
 use std::path::{Path, PathBuf};
 
-use crate::structs::{Config, GlobalState};
+use crate::structs::{Config, GlobalState, Profile};
 
 static MPL_ROOT_DIR_NAME: &str = ".mplrs";
-
 static PROFILES_DIR_NAME: &str = "profiles";
-static PROFILE_STASH_DIR_NAME: &str = "stashes";
+pub static PROFILE_STASH_DIR_NAME: &str = "stashes";
+pub static STASH_STATE_DIR_NAME: &str = "state";
 
-static STASH_STATE_DIR_NAME: &str = "state";
-
-static DEFAULT_STASH_NAME: &str = "collection";
-
-static CONFIG_FILE_NAME: &str = "config.toml";
+pub static CONFIG_FILE_NAME: &str = "config.toml";
 static STATE_FILE_NAME: &str = "state.toml";
 
 pub fn get_system_user() -> String {
@@ -36,95 +32,86 @@ pub fn get_mpl_dir() -> PathBuf {
     }
 }
 
+pub fn get_profiles_dir() -> PathBuf {
+    get_mpl_dir().join(PROFILES_DIR_NAME)
+}
+
 pub fn get_mpl_state_file() -> PathBuf {
     get_mpl_dir().join(STATE_FILE_NAME)
 }
 
-pub fn get_mpl_config_file() -> PathBuf {
+pub fn get_global_config_file() -> PathBuf {
     get_mpl_dir().join(CONFIG_FILE_NAME)
 }
 
-pub fn create_dirs(dir_path: &Path) {
+pub fn create_dir(dir_path: &Path) {
     std::fs::create_dir_all(dir_path).expect("Could not create directories");
 }
 
-pub fn create_profile_stash_dir(profile_name: &String, stash_name: &String) {
-    // create stash dir
-    let profiles_dir: PathBuf = get_mpl_dir().join(PROFILES_DIR_NAME);
-    let profile_stash_dir: PathBuf = profiles_dir
-        .clone()
-        .join(profile_name)
-        .join(PROFILE_STASH_DIR_NAME)
-        .join(stash_name);
-    create_dirs(&profile_stash_dir);
-
-    // create stash sub dirs
-    create_dirs(&profile_stash_dir.clone().join(STASH_STATE_DIR_NAME));
+pub fn read_toml_file(file_path: &Path) -> String {
+    std::fs::read_to_string(file_path).expect("Could not read toml file.")
 }
 
-pub fn create_profile_dir(profile_name: &String) {
-    let profiles_dir: PathBuf = get_mpl_dir().join(PROFILES_DIR_NAME);
-    // create profile dir
-    create_dirs(&profiles_dir.join(profile_name));
-    // create profile stashes dir and default stash
-    create_profile_stash_dir(profile_name, &DEFAULT_STASH_NAME.to_string());
-    // TODO: create profile config file
-    // write_toml(get_default_config()
+pub fn write_file(file_path: &Path, file_contents: String) {
+    std::fs::write(file_path, file_contents).expect("Could not write file.");
 }
 
-// pub fn get_profile_config(profile_name: &String) -> Config {
-//     let toml_string = read_toml(file_path);
-// }
-
-// pub fn write_toml(file_path: &Path, )
-
-pub fn write_mpl_config(config: Config) {
-    let toml_conf = toml::to_string(&config).expect("Could not encode toml config value.");
-    std::fs::write(get_mpl_config_file(), toml_conf).expect("Could not write to config file.");
+pub fn read_config_file(conf_location: Option<PathBuf>) -> Config {
+    let conf_str = read_toml_file(
+        &conf_location
+            .unwrap_or(get_mpl_dir())
+            .join(CONFIG_FILE_NAME),
+    );
+    toml::from_str(&conf_str).expect("Could not decode toml string.")
 }
 
-pub fn write_mpl_state(state: GlobalState) {
+pub fn write_config_file(config: &Config, conf_location: Option<&PathBuf>) {
+    let toml_conf = toml::to_string(config).expect("Could not encode toml config value.");
+    write_file(
+        &conf_location
+            .unwrap_or(&get_mpl_dir())
+            .join(CONFIG_FILE_NAME),
+        toml_conf,
+    );
+}
+
+pub fn write_global_state_file(state: GlobalState) {
     let toml_state = toml::to_string(&state).expect("Could not encode toml state value.");
-    std::fs::write(get_mpl_state_file(), toml_state).expect("Could not write to state file.");
+    write_file(&get_mpl_state_file(), toml_state);
 }
 
-pub fn read_toml(file_path: &Path) -> String {
-    std::fs::read_to_string(file_path).expect("Could not read state file.")
-}
-
-pub fn get_profile_names() -> Vec<String> {
-    let profiles_dir: PathBuf = get_mpl_dir().join(PROFILES_DIR_NAME);
-    let profile_paths: Vec<PathBuf> = std::fs::read_dir(profiles_dir)
+pub fn get_dir_names(dir_location: &PathBuf) -> Vec<String> {
+    let dir_paths: Vec<PathBuf> = std::fs::read_dir(dir_location)
         .unwrap()
         .filter(|r| r.is_ok())
         .map(|r| r.unwrap().path())
         .filter(|r| r.is_dir())
         .collect();
-    let mut profile_names = vec![];
-    for path in &profile_paths {
-        profile_names.push(path.file_name().unwrap().to_str().unwrap().to_string());
+    let mut dir_names = vec![];
+    for path in &dir_paths {
+        dir_names.push(path.file_name().unwrap().to_str().unwrap().to_string());
     }
-    profile_names
+    dir_names
 }
 
 pub fn check_fs() {
     // create mpl dir if it does not exist
     let mpl_dir: PathBuf = get_mpl_dir();
-    create_dirs(&mpl_dir);
+    create_dir(&mpl_dir);
 
     // create global config and state files if they do not exist
-    if !get_mpl_config_file().exists() {
-        write_mpl_config(Config::default());
+    if !get_global_config_file().exists() {
+        write_config_file(&Config::default(), None);
     }
     if !get_mpl_state_file().exists() {
-        write_mpl_state(GlobalState::default());
+        write_global_state_file(GlobalState::default());
     }
 
-    // create profiles dir if it does not exist
-    let profiles_dir: PathBuf = mpl_dir.join(PROFILES_DIR_NAME);
-    create_dirs(&profiles_dir);
+    // ensure profiles dir exists
+    let profiles_dir = get_profiles_dir();
+    create_dir(&profiles_dir);
 
-    // create default profile dir if no profiles exist
+    // create default profile if no profiles exist
     let profile_dirs: Vec<PathBuf> = std::fs::read_dir(&profiles_dir)
         .unwrap()
         .filter(|r| r.is_ok())
@@ -133,6 +120,7 @@ pub fn check_fs() {
         .collect();
     if profile_dirs.is_empty() {
         let default_profile_name = get_system_user();
-        create_profile_dir(&default_profile_name);
+        let default_profile = Profile::new(&default_profile_name);
+        default_profile.save();
     }
 }

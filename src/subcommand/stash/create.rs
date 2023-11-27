@@ -1,5 +1,5 @@
-use crate::structs::{GlobalState, Profile};
-use crate::util::fs::{create_profile_stash_dir, get_profile_names};
+use crate::structs::{GlobalState, Profile, Stash};
+use crate::util::fs::{get_dir_names, get_profiles_dir};
 
 pub fn create(stash_names: Vec<String>, profile: Option<String>) {
     // load active profile
@@ -12,7 +12,7 @@ pub fn create(stash_names: Vec<String>, profile: Option<String>) {
     match profile {
         None => {}
         Some(profile_name) => {
-            if get_profile_names().contains(&profile_name) {
+            if get_dir_names(&get_profiles_dir()).contains(&profile_name) {
                 active_profile = Profile::load(profile_name.to_owned());
             } else {
                 println!("Error: Profile '{}' doesn't exist.", profile_name);
@@ -25,7 +25,8 @@ pub fn create(stash_names: Vec<String>, profile: Option<String>) {
     if profile_exists {
         for stash_name in stash_names {
             // TODO: check if stash(es) already exist in profile
-            create_profile_stash_dir(&active_profile.name, &stash_name);
+            let new_stash = Stash::new(Some(&stash_name));
+            new_stash.save(&active_profile);
             println!(
                 "Created stash {} in profile {}.",
                 stash_name, active_profile.name
