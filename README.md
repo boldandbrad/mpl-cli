@@ -210,7 +210,7 @@ Manage local stashes in the active profile.
 #### Commands
 
 - `mpl stash create` ✳️ - create new stashes
-- `mpl stash delete` 🚧 - delete existing stashes
+- `mpl stash delete` ✳️ - delete existing stashes
 - `mpl stash list` ✳️ - list existing stashes
   - `-v`/`--verbose` ❌ - list stats for stashes
 - `mpl stash rename` ❌ - rename an existing stash
@@ -242,7 +242,7 @@ Manage user profiles.
 - `mpl profile active` ✅ - display the current profile
 - `mpl profile switch` ✳️ - switch the active profile
 - `mpl profile create` ✳️ - create a new profile
-- `mpl profile delete` 🚧 - delete an existing profile
+- `mpl profile delete` ✳️ - delete an existing profile
 - `mpl profile rename` ❌ - rename an existing profile
 
 ### Config 🚧

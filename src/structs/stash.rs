@@ -1,6 +1,6 @@
 // use super::Title;
 use super::Profile;
-use crate::util::fs::{create_dir, PROFILE_STASH_DIR_NAME, STASH_STATE_DIR_NAME};
+use crate::util::fs::{create_dir, delete_dir, PROFILE_STASH_DIR_NAME, STASH_STATE_DIR_NAME};
 use serde::{Deserialize, Serialize};
 
 pub static DEFAULT_STASH_NAME: &str = "collection";
@@ -11,6 +11,13 @@ pub struct Stash {
     pub states: Vec<StashState>,
 }
 
+impl PartialEq for Stash {
+    fn eq(&self, other: &Self) -> bool {
+        self.name == other.name
+    }
+}
+impl Eq for Stash {}
+
 impl Stash {
     pub fn new(name: Option<&String>) -> Stash {
         Stash {
@@ -19,9 +26,9 @@ impl Stash {
         }
     }
 
-    pub fn load(name: String) -> Stash {
+    pub fn load(name: &String) -> Stash {
         Stash {
-            name,
+            name: name.to_string(),
             // TODO: load states
             states: vec![],
         }
@@ -40,6 +47,14 @@ impl Stash {
         create_dir(stash_state_dir);
 
         // TODO: save stash state to the file system
+    }
+
+    pub fn delete(&self, profile: &Profile) {
+        let stash_dir = &profile
+            .get_dir()
+            .join(PROFILE_STASH_DIR_NAME)
+            .join(&self.name);
+        delete_dir(stash_dir)
     }
     // pub fn get_current_state() -> StashState {}
 

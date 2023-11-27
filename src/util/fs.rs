@@ -48,6 +48,12 @@ pub fn create_dir(dir_path: &Path) {
     std::fs::create_dir_all(dir_path).expect("Could not create directories");
 }
 
+pub fn delete_dir(dir_path: &Path) {
+    if dir_path.exists() {
+        std::fs::remove_dir_all(dir_path).expect("Could not delete directories");
+    }
+}
+
 pub fn read_toml_file(file_path: &Path) -> String {
     std::fs::read_to_string(file_path).expect("Could not read toml file.")
 }

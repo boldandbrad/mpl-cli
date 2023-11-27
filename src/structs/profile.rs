@@ -1,5 +1,7 @@
 use super::{Config, Stash};
-use crate::util::fs::{create_dir, get_dir_names, get_profiles_dir, PROFILE_STASH_DIR_NAME};
+use crate::util::fs::{
+    create_dir, delete_dir, get_dir_names, get_profiles_dir, PROFILE_STASH_DIR_NAME,
+};
 use serde::{Deserialize, Serialize};
 use std::path::PathBuf;
 
@@ -9,6 +11,13 @@ pub struct Profile {
     pub config: Config,
     pub stashes: Vec<Stash>,
 }
+
+impl PartialEq for Profile {
+    fn eq(&self, other: &Self) -> bool {
+        self.name == other.name
+    }
+}
+impl Eq for Profile {}
 
 impl Profile {
     // create a new profile instance with default values
@@ -24,10 +33,7 @@ impl Profile {
     pub fn load(name: String) -> Profile {
         let profile_dir = get_profiles_dir().join(&name);
         let stash_names = get_dir_names(&profile_dir.join(PROFILE_STASH_DIR_NAME));
-        let stashes: Vec<Stash> = stash_names
-            .iter()
-            .map(|sn| Stash::load(sn.to_string()))
-            .collect();
+        let stashes: Vec<Stash> = stash_names.iter().map(Stash::load).collect();
         Profile {
             config: Config::load(Some(profile_dir)),
             name,
@@ -54,5 +60,9 @@ impl Profile {
         for stash in &self.stashes {
             stash.save(self)
         }
+    }
+
+    pub fn delete(&self) {
+        delete_dir(&self.get_dir())
     }
 }
