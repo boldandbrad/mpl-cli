@@ -196,6 +196,10 @@ discover what to do next!
 - `mpl add` 🚧 - add titles to a stash
 - `mpl drop` 🚧 - drop titles from a stash
 - `mpl titles` 🚧 - list titles in stashes
+  - `--sort` ❌ - sort titles by provided value
+  - `-g`/`--games-only` ❌ - list only games
+  - `-e`/`--expansions-only` ❌ - list only expansions
+  - `--group-expansions` ❌ - group expansions below their parent game
 - `mpl move` ❌ - move titles to another stash
 - `mpl update` ❌ - update local stash data
 
@@ -299,20 +303,26 @@ Log and manage title plays.
 
 **mpl** respects the following env variables:
 
-- `MPL_HOME`/`XDG_CONFIG_HOME` - change where `.mpl/` is stored. Default:
+- `MPL_HOME`/`XDG_CONFIG_HOME` ❌ - change where `.mpl/` is stored. Default:
   `~/.mpl/`
 
 ### Config options
+
+> Needs more thought and design.
 
 These options can be managed with `mpl config`.
 
 > Global configs are stored in `.mpl/config.toml`.
 > Profile level configs are stored in `.mpl/<PROFILE>/config.toml`
 
-- `update_on_change` - automatically pass `--update` to add/drop operations.
-  Default `false`
-- `default_stash` - the default stash to perform add/drop operations on. Default
-  `collection`
+- `update_on_change` ❌ - automatically pass `--update` to add/drop operations
+  [Default `false`]
+- `quiet_success` ❌ - force `--quiet` on all supported commands on success
+  [Default `false`]
+- `pretty_format` ❌ - format outputs with table borders and emojis [Default
+  `true`]
+- `default_stash_name` ❌ - the default name to use when creating new stashes
+  [Default `collection`]
 
 ### Completions
 
