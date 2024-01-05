@@ -2,7 +2,7 @@ use crate::util::fs::{read_config_file, write_config_file};
 use serde::{Deserialize, Serialize};
 use std::path::PathBuf;
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Default, Serialize, Deserialize)]
 pub struct Config {}
 
 impl Config {
@@ -17,9 +17,9 @@ impl Config {
     }
 }
 
-impl Default for Config {
-    // get default config
-    fn default() -> Self {
-        Self {}
-    }
-}
+// impl Default for Config {
+//     // get default config
+//     fn default() -> Self {
+//         Self {}
+//     }
+// }

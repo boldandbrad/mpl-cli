@@ -78,7 +78,6 @@ impl From<&Element> for Title {
                 .parse::<u8>()
                 .unwrap(),
             description: "description".to_string(),
-            ..Default::default()
         }
     }
 }

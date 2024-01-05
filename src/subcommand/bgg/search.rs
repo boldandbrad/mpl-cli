@@ -1,4 +1,4 @@
-use crate::util::bgg_api::{get_items, search_items};
+use crate::util::bgg_api::search_items;
 
 pub fn search(query: String) {
     println!("Search for {:?}", query);

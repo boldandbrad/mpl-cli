@@ -1,17 +1,15 @@
 use crate::structs::Title;
+use anyhow::{anyhow, Result};
 use reqwest::{self, StatusCode};
 use std::{thread, time};
 use xmltree::Element;
 
-static BGG_API2_BASE_URL: &str = "https://boardgamegeek.com/xmlapi2/";
+static BGG_XML_API2_BASE_URL: &str = "https://boardgamegeek.com/xmlapi2/";
 static BGG_BOARDGAME_TYPE: &str = "boardgame";
 static BGG_EXPANSION_TYPE: &str = "boardgameexpansion";
 
-fn api_get(
-    endpoint: &str,
-    params: Vec<(&str, &str)>,
-) -> Result<std::string::String, Box<dyn std::error::Error>> {
-    let mut base_url: String = BGG_API2_BASE_URL.to_string();
+fn xml_api2_get(endpoint: &str, params: Vec<(&str, &str)>) -> Result<std::string::String> {
+    let mut base_url: String = BGG_XML_API2_BASE_URL.to_string();
     base_url.push_str(endpoint);
     let url = reqwest::Url::parse_with_params(base_url.as_str(), &params)?;
     loop {
@@ -27,21 +25,30 @@ fn api_get(
             }
             StatusCode::TOO_MANY_REQUESTS => {
                 // rate limit reached
-                return Err(String::from(
+                return Err(anyhow!(
                     "BoardGameGeek API rate limit reached. Please try again later.",
-                )
-                .into());
+                ));
+            }
+            StatusCode::SERVICE_UNAVAILABLE => {
+                // api is unavailable due to upgrades or otherwise
+                return Err(anyhow!(
+                    "BoardGameGeek API is currently down for maintenance. Please try again later.",
+                ));
             }
             s => {
                 // unknown api response
-                let err_msg = format!("Unknown API Response ({:?}) - {:?}", s, response.text());
-                return Err(err_msg.into());
+                return Err(anyhow!(
+                    "Unknown API Response ({:?}) - {:?}",
+                    s,
+                    response.text()
+                ));
             }
         }
     }
 }
 
-pub fn get_items(bgg_ids: Vec<String>) -> Vec<Title> {
+pub fn get_items(bgg_ids: Vec<String>) -> Result<Vec<Title>> {
+    // build and perform get request
     let bgg_ids_binding = bgg_ids.join(",");
     let types_binding = format!("{},{}", BGG_BOARDGAME_TYPE, BGG_EXPANSION_TYPE);
     let params = vec![
@@ -49,34 +56,51 @@ pub fn get_items(bgg_ids: Vec<String>) -> Vec<Title> {
         ("type", types_binding.as_str()),
         ("stats", "1"),
     ];
-    // serialize returned xml to return vector of Titles?
-    let xml_str = api_get("thing", params).unwrap();
-    // println!("{}", xml_str);
-    let items_element = Element::parse(xml_str.as_bytes()).unwrap();
+    let api_get_result = xml_api2_get("thing", params);
+    let xml_str = match api_get_result {
+        Ok(s) => s,
+        Err(e) => return Err(e),
+    };
+    // serialize result items into a list of titles
     let mut titles: Vec<Title> = vec![];
-    for child in items_element.children {
-        // println!("{:#?}", child);
+    for child in Element::parse(xml_str.as_bytes())?.children {
         let title = Title::from(child.as_element().unwrap());
         titles.push(title);
     }
-    titles
+    Ok(titles)
 }
 
-pub fn get_item(bgg_id: String) -> Title {
-    let titles = get_items(vec![bgg_id]);
-    titles.into_iter().nth(0).unwrap()
+pub fn get_item(bgg_id: String) -> Result<Title> {
+    let items_result = get_items(vec![bgg_id]);
+    match items_result {
+        Ok(titles) => Ok(titles.into_iter().next().unwrap()),
+        Err(e) => Err(e),
+    }
 }
 
-pub fn search_items(query: String) -> Vec<Title> {
+pub fn search_items(query: String) -> Result<Vec<Title>> {
+    // build and perform search request
     let params = vec![("type", BGG_BOARDGAME_TYPE), ("query", query.as_str())];
-    let xml_str = api_get("search", params).unwrap();
-    // println!("{}", xml_str);
-    let items_element = Element::parse(xml_str.as_bytes()).unwrap();
-    let mut titles: Vec<Title> = vec![];
-    for child in items_element.children {
-        println!("{:#?}", child);
-        let title = Title::from(child.as_element().unwrap());
-        titles.push(title);
+    let api_search_result = xml_api2_get("search", params);
+    let xml_str = match api_search_result {
+        Ok(s) => s,
+        Err(e) => return Err(e),
+    };
+    // TODO: handle empty response?
+    // get title ids
+    let mut title_ids: Vec<String> = vec![];
+    for child in Element::parse(xml_str.as_bytes())?.children {
+        title_ids.push(
+            child
+                .as_element()
+                .unwrap()
+                .attributes
+                .get("id")
+                .unwrap()
+                .to_string(),
+        )
     }
-    titles
+
+    // get and return full item details
+    get_items(title_ids)
 }
