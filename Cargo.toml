@@ -20,6 +20,7 @@ serde = { version = "1.0.189", features = ["derive"] }
 serde_yaml = "0.9.25"
 toml = "0.8.8"
 whoami = "1.4.1"
+xmltree = "0.10.3"
 
 [[bin]]
 name = "mpl"
