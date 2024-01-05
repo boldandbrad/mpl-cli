@@ -3,7 +3,35 @@ use std::path::{Path, PathBuf};
 
 use crate::structs::{Config, GlobalState, Profile};
 
-static MPL_ROOT_DIR_NAME: &str = ".mplrs";
+/*
+Intended file structure:
+
+Config directory
+$XDG_CONFIG_HOME/mpl/
+    config.toml
+    profiles/
+        profile-1/
+            config.toml
+        profile-2/
+            config.toml
+
+
+    config.toml
+
+
+State directory
+$XDG_STATE_HOME/mpl/
+    state.toml
+
+Data directory?
+$XDG_DATA_HOME/mpl/
+
+Cache directory
+$XDG_CACHE_HOME/mpl/
+
+*/
+
+static MPL_ROOT_DIR_NAME: &str = "mpl";
 static PROFILES_DIR_NAME: &str = "profiles";
 pub static PROFILE_STASH_DIR_NAME: &str = "stashes";
 pub static STASH_STATE_DIR_NAME: &str = "state";
@@ -20,8 +48,8 @@ pub fn get_mpl_dir() -> PathBuf {
     let user: String = get_system_user();
     let os: &str = env::consts::OS;
     match os {
-        "macos" => PathBuf::from(format!("/Users/{}/{}", user, mpl_root_dir)),
-        "linux" => PathBuf::from(format!("/home/{}/{}", user, mpl_root_dir)),
+        "macos" => PathBuf::from(format!("/Users/{}/.config/{}", user, mpl_root_dir)),
+        "linux" => PathBuf::from(format!("/home/{}/.config/{}", user, mpl_root_dir)),
         "windows" => {
             let mut path = PathBuf::new().join(r"C:\").join("Users");
             path.push(user);
