@@ -13,10 +13,12 @@ impl GlobalState {
         let toml_str = read_toml_file(&get_mpl_state_file());
         toml::from_str(&toml_str).expect("Could not decode toml state string.")
     }
+}
 
+impl Default for GlobalState {
     // get default global state
-    pub fn default() -> GlobalState {
-        GlobalState {
+    fn default() -> Self {
+        Self {
             active_profile: get_system_user(),
         }
     }

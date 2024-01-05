@@ -11,13 +11,15 @@ impl Config {
         read_config_file(conf_location)
     }
 
-    // get default config
-    pub fn default() -> Config {
-        Config {}
-    }
-
     // save config to file system
     pub fn save(&self, conf_location: Option<&PathBuf>) {
         write_config_file(self, conf_location);
+    }
+}
+
+impl Default for Config {
+    // get default config
+    fn default() -> Self {
+        Self {}
     }
 }
