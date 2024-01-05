@@ -8,7 +8,7 @@ pub mod profile;
 pub use profile::Profile;
 
 pub mod stash;
-pub use stash::{Stash, StashState};
+pub use stash::Stash;
 
 pub mod title;
-pub use title::{Title, TitleCredits, TitleStats, TitleType};
+pub use title::Title;
