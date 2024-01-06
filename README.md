@@ -42,7 +42,7 @@ powered by [BoardGameGeek](https://boardgamegeek.com) (BGG) public APIs.
 
 - Get started quickly with BGG user collection import ❌
 - Discover new titles via BGG Hotness, new releases, active crowdfunding
-  campaigns, and BGG search ❌
+  campaigns, and BGG search 🚧
 - Grow your collection by searching and opening Geek Market listings ❌
 - Flexible local stash maintainance and customization 🚧
 - Powerful cross-stash search to find the best title for game night ❌
@@ -245,7 +245,7 @@ Perform BoardGameGeek related actions.
   - Option `--listing` - open a geek market listing
 - `mpl bgg import` ❌ - import bgg user collections
   - Option `--dry-run` ❌ - simulate import without persisting changes
-- `mpl bgg hotness` ❌ - view bgg hotness list
+- `mpl bgg hotness` ✳️ - view bgg hotness list
 - `mpl bgg campaigns` ❌ - list active crowdfunding campaigns
 - `mpl bgg releases` ❌ - list recent title releases
 

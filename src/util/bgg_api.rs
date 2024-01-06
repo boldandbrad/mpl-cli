@@ -1,4 +1,5 @@
 use crate::structs::Title;
+use crate::util::xml::get_element_ids;
 use anyhow::{anyhow, Result};
 use reqwest::{self, StatusCode};
 use std::{thread, time};
@@ -78,6 +79,19 @@ pub fn get_item(bgg_id: String) -> Result<Title> {
     }
 }
 
+pub fn hot_items() -> Result<Vec<Title>> {
+    let params = vec![("type", BGG_BOARDGAME_TYPE)];
+    let api_hot_result = xml_api2_get("hot", params);
+    let xml_str = match api_hot_result {
+        Ok(s) => s,
+        Err(e) => return Err(e),
+    };
+
+    // get and return full item details
+    let title_ids = get_element_ids(&Element::parse(xml_str.as_bytes())?.children);
+    get_items(title_ids)
+}
+
 pub fn search_items(query: String) -> Result<Vec<Title>> {
     // build and perform search request
     let params = vec![("type", BGG_BOARDGAME_TYPE), ("query", query.as_str())];
@@ -86,21 +100,8 @@ pub fn search_items(query: String) -> Result<Vec<Title>> {
         Ok(s) => s,
         Err(e) => return Err(e),
     };
-    // TODO: handle empty response?
-    // get title ids
-    let mut title_ids: Vec<String> = vec![];
-    for child in Element::parse(xml_str.as_bytes())?.children {
-        title_ids.push(
-            child
-                .as_element()
-                .unwrap()
-                .attributes
-                .get("id")
-                .unwrap()
-                .to_string(),
-        )
-    }
 
     // get and return full item details
+    let title_ids = get_element_ids(&Element::parse(xml_str.as_bytes())?.children);
     get_items(title_ids)
 }

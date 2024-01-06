@@ -145,7 +145,8 @@ impl From<&Element> for TitleStats {
                 .unwrap(),
             rank: get_child_element_val(rank_element, "rank")
                 .parse::<u16>()
-                .unwrap(),
+                // default needs to be given because expansions don't have ranks
+                .unwrap_or(0),
         }
     }
 }
