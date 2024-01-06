@@ -1,6 +1,6 @@
 use anyhow::{anyhow, Result};
 
-pub fn info() -> Result<()> {
-    println!("View stash details");
+pub fn list() -> Result<()> {
+    println!("List titles");
     Err(anyhow!("Not yet implemented."))
 }

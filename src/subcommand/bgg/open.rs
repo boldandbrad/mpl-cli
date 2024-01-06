@@ -1,4 +1,6 @@
-pub fn open() {
+use anyhow::{anyhow, Result};
+
+pub fn open() -> Result<()> {
     println!("Open links in the web browser.");
-    println!("Not yet implemented.")
+    Err(anyhow!("Not yet implemented."))
 }

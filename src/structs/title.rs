@@ -56,27 +56,28 @@ impl Default for Title {
 }
 
 impl From<&Element> for Title {
-    fn from(item_element: &Element) -> Self {
-        let item_attrs = &item_element.attributes;
+    fn from(element: &Element) -> Self {
+        let item_attrs = &element.attributes;
         Self {
             id: item_attrs.get("id").unwrap().parse::<u32>().unwrap(),
-            name: get_child_element_val(item_element, "name"),
+            name: get_child_element_val(element, "name"),
             ttype: TitleType::from_str(item_attrs.get("type").unwrap()).unwrap(),
-            year: get_child_element_val(item_element, "yearpublished")
+            year: get_child_element_val(element, "yearpublished")
                 .parse::<u16>()
                 .unwrap(),
-            min_players: get_child_element_val(item_element, "minplayers")
+            min_players: get_child_element_val(element, "minplayers")
                 .parse::<u8>()
                 .unwrap(),
-            max_players: get_child_element_val(item_element, "maxplayers")
+            max_players: get_child_element_val(element, "maxplayers")
                 .parse::<u8>()
                 .unwrap(),
-            play_time: get_child_element_val(item_element, "playingtime")
+            play_time: get_child_element_val(element, "playingtime")
                 .parse::<u16>()
                 .unwrap(),
-            min_age: get_child_element_val(item_element, "minage")
+            min_age: get_child_element_val(element, "minage")
                 .parse::<u8>()
                 .unwrap(),
+            // TODO: actually grab description
             description: "description".to_string(),
         }
     }

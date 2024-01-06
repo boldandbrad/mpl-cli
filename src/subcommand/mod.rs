@@ -1,4 +1,5 @@
 pub mod bgg;
+pub mod config;
 pub mod profile;
 pub mod stash;
 
@@ -8,5 +9,5 @@ pub use add::add;
 pub mod drop;
 pub use drop::drop;
 
-pub mod titles;
-pub use titles::titles;
+pub mod list;
+pub use list::list;

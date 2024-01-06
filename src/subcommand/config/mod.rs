@@ -1,6 +1,3 @@
-pub mod complete;
-pub use complete::complete;
-
 pub mod get;
 pub use get::get;
 

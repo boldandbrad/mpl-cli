@@ -1,4 +1,6 @@
-pub fn releases() {
+use anyhow::{anyhow, Result};
+
+pub fn releases() -> Result<()> {
     println!("List recent releases.");
-    println!("Not yet implemented.")
+    Err(anyhow!("Not yet implemented."))
 }

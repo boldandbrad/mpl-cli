@@ -1,6 +1,6 @@
+use crate::util::env::get_system_user;
+use crate::util::fs::{get_mpl_state_file, read_toml_file};
 use serde::{Deserialize, Serialize};
-
-use crate::util::fs::{get_mpl_state_file, get_system_user, read_toml_file};
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct GlobalState {

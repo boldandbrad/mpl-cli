@@ -195,7 +195,7 @@ discover what to do next!
 
 - `mpl add` 🚧 - add titles to a stash
 - `mpl drop` 🚧 - drop titles from a stash
-- `mpl titles` 🚧 - list titles in stashes
+- `mpl list` 🚧 - list stashed titles
   - `--sort` ❌ - sort titles by provided value
   - `-g`/`--games-only` ❌ - list only games
   - `-e`/`--expansions-only` ❌ - list only expansions
@@ -301,10 +301,12 @@ Log and manage title plays.
 
 ### Environment Variables
 
-**mpl** respects the following env variables:
+**mpl** respects the following env variables to modify default behavior. In
+cases where multiple variables control the same behavior, **mpl** obeys the
+left-most present variable.
 
-- `MPL_HOME`/`XDG_CONFIG_HOME` ❌ - change where `.mpl/` is stored. Default:
-  `~/.mpl/`
+- `MPL_CONFIG_HOME`/`XDG_CONFIG_HOME` ❌ - change where **mpl** configs are
+  located. Default: `~/.config/mpl/`
 
 ### Config options
 

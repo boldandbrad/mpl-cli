@@ -1,4 +1,6 @@
-pub fn rename() {
+use anyhow::{anyhow, Result};
+
+pub fn rename() -> Result<()> {
     println!("Rename a stash");
-    println!("Not yet implemented.")
+    Err(anyhow!("Not yet implemented."))
 }

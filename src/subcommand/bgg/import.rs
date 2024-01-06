@@ -1,4 +1,6 @@
-pub fn import() {
+use anyhow::{anyhow, Result};
+
+pub fn import() -> Result<()> {
     println!("Import BGG user collections.");
-    println!("Not yet implemented.")
+    Err(anyhow!("Not yet implemented."))
 }

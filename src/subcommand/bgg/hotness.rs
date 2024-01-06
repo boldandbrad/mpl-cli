@@ -1,4 +1,6 @@
-pub fn hotness() {
+use anyhow::{anyhow, Result};
+
+pub fn hotness() -> Result<()> {
     println!("View BGG hotness list.");
-    println!("Not yet implemented.")
+    Err(anyhow!("Not yet implemented."))
 }

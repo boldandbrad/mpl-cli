@@ -29,7 +29,7 @@ pub enum SubCommands {
         bgg_ids: Vec<String>,
     },
     /// List titles in stashes
-    Titles {},
+    List {},
     /// Perform BoardGameGeek related actions
     Bgg {
         #[clap(subcommand)]
@@ -112,6 +112,25 @@ pub enum ConfigSubCommands {
         #[clap(value_enum)]
         /// The shell to generate auto completions for
         shell: Shell,
+    },
+    /// Get the current value of the given config option
+    Get {
+        /// The option to get the value of
+        option_name: String,
+    },
+    /// List all config options and their current values
+    List {},
+    /// Set the value of the given config option
+    Set {
+        /// The option to set the value for
+        option_name: String,
+        /// The value to set the option to
+        option_value: String,
+    },
+    /// Revert the value of the given option to its defualt
+    Unset {
+        /// The option to revert
+        option_name: String,
     },
 }
 

@@ -1,4 +1,4 @@
-use std::env;
+use crate::util::env::{get_os, get_system_user};
 use std::path::{Path, PathBuf};
 
 use crate::structs::{Config, GlobalState, Profile};
@@ -28,7 +28,11 @@ $XDG_DATA_HOME/mpl/
 
 Cache directory
 $XDG_CACHE_HOME/mpl/
-
+    title_data/
+        2024/
+            2024-01/
+                2024-01-01.ron
+                ...
 */
 
 static MPL_ROOT_DIR_NAME: &str = "mpl";
@@ -39,15 +43,10 @@ pub static STASH_STATE_DIR_NAME: &str = "state";
 pub static CONFIG_FILE_NAME: &str = "config.toml";
 static STATE_FILE_NAME: &str = "state.toml";
 
-pub fn get_system_user() -> String {
-    whoami::username()
-}
-
-pub fn get_mpl_dir() -> PathBuf {
+fn get_config_dir() -> PathBuf {
     let mpl_root_dir: String = MPL_ROOT_DIR_NAME.to_string();
     let user: String = get_system_user();
-    let os: &str = env::consts::OS;
-    match os {
+    match get_os().as_str() {
         "macos" => PathBuf::from(format!("/Users/{}/.config/{}", user, mpl_root_dir)),
         "linux" => PathBuf::from(format!("/home/{}/.config/{}", user, mpl_root_dir)),
         "windows" => {
@@ -61,15 +60,15 @@ pub fn get_mpl_dir() -> PathBuf {
 }
 
 pub fn get_profiles_dir() -> PathBuf {
-    get_mpl_dir().join(PROFILES_DIR_NAME)
+    get_config_dir().join(PROFILES_DIR_NAME)
 }
 
 pub fn get_mpl_state_file() -> PathBuf {
-    get_mpl_dir().join(STATE_FILE_NAME)
+    get_config_dir().join(STATE_FILE_NAME)
 }
 
 pub fn get_global_config_file() -> PathBuf {
-    get_mpl_dir().join(CONFIG_FILE_NAME)
+    get_config_dir().join(CONFIG_FILE_NAME)
 }
 
 pub fn create_dir(dir_path: &Path) {
@@ -93,7 +92,7 @@ pub fn write_file(file_path: &Path, file_contents: String) {
 pub fn read_config_file(conf_location: Option<PathBuf>) -> Config {
     let conf_str = read_toml_file(
         &conf_location
-            .unwrap_or(get_mpl_dir())
+            .unwrap_or(get_config_dir())
             .join(CONFIG_FILE_NAME),
     );
     toml::from_str(&conf_str).expect("Could not decode toml string.")
@@ -103,7 +102,7 @@ pub fn write_config_file(config: &Config, conf_location: Option<&PathBuf>) {
     let toml_conf = toml::to_string(config).expect("Could not encode toml config value.");
     write_file(
         &conf_location
-            .unwrap_or(&get_mpl_dir())
+            .unwrap_or(&get_config_dir())
             .join(CONFIG_FILE_NAME),
         toml_conf,
     );
@@ -130,7 +129,7 @@ pub fn get_dir_names(dir_location: &PathBuf) -> Vec<String> {
 
 pub fn check_fs() {
     // create mpl dir if it does not exist
-    let mpl_dir: PathBuf = get_mpl_dir();
+    let mpl_dir: PathBuf = get_config_dir();
     create_dir(&mpl_dir);
 
     // create global config and state files if they do not exist
