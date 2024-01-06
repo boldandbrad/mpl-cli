@@ -58,6 +58,12 @@ impl Default for Title {
 impl From<&Element> for Title {
     fn from(element: &Element) -> Self {
         let item_attrs = &element.attributes;
+        let item_description = element
+            .get_child("description")
+            .unwrap()
+            .get_text()
+            .unwrap()
+            .to_string();
         Self {
             id: item_attrs.get("id").unwrap().parse::<u32>().unwrap(),
             name: get_child_element_val(element, "name"),
@@ -77,8 +83,7 @@ impl From<&Element> for Title {
             min_age: get_child_element_val(element, "minage")
                 .parse::<u8>()
                 .unwrap(),
-            // TODO: actually grab description
-            description: "description".to_string(),
+            description: html_escape::decode_html_entities(&item_description).to_string(),
         }
     }
 }
