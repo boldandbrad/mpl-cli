@@ -236,9 +236,9 @@ Manage local stashes in the active profile.
 
 Perform BoardGameGeek related actions.
 
-- `mpl bgg search` 🚧 - search boardgamegeek for titles
+- `mpl bgg search` ✳️ - search boardgamegeek for titles
   - Flag `--market` ❌ - search geek market listings
-- `mpl bgg info` 🚧 - view title details
+- `mpl bgg info` ✳️ - view title details
 - `mpl bgg open` ❌ - open links in the web browser
   - Option `--title` - open a title's boardgamegeek page(s)
   - Option `--campaign` - open a title's crowdfunding campaign page
