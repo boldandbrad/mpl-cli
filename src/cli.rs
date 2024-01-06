@@ -67,6 +67,10 @@ pub enum BggSubCommands {
     Info {
         /// BoardGameGeek item id
         bgg_id: String,
+        #[clap(long, short = 'v')]
+        #[clap(action = ArgAction::SetTrue)]
+        /// Display additional information
+        verbose: bool,
     },
     /// Open links in the web browser
     Open {},
@@ -93,7 +97,7 @@ pub enum StashSubCommands {
         #[clap(long, short = 'F')]
         #[clap(action = ArgAction::SetTrue)]
         /// Force delete without confirmation
-        force: Option<bool>,
+        force: bool,
     },
     /// View details of a stash
     Info {},

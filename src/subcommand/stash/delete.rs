@@ -1,7 +1,7 @@
 use crate::structs::{GlobalState, Profile, Stash};
 use anyhow::Result;
 
-pub fn delete(stash_names: Vec<String>, _force: Option<bool>) -> Result<()> {
+pub fn delete(stash_names: Vec<String>, _force: bool) -> Result<()> {
     // TODO: implement force/yes option
     // load active profile
     let active_profile = Profile::load(GlobalState::load().active_profile);

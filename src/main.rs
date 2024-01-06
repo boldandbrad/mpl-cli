@@ -30,7 +30,7 @@ fn main() -> Result<()> {
             BggSubCommands::Campaigns {} => subcommand::bgg::campaigns(),
             BggSubCommands::Hotness {} => subcommand::bgg::hotness(),
             BggSubCommands::Import {} => subcommand::bgg::import(),
-            BggSubCommands::Info { bgg_id } => subcommand::bgg::info(bgg_id),
+            BggSubCommands::Info { bgg_id, verbose } => subcommand::bgg::info(bgg_id, verbose),
             BggSubCommands::Open {} => subcommand::bgg::open(),
             BggSubCommands::Releases {} => subcommand::bgg::releases(),
             BggSubCommands::Search { query } => subcommand::bgg::search(query),
