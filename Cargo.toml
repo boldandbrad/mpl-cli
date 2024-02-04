@@ -11,17 +11,17 @@ license = "MIT"
 
 [dependencies]
 anyhow = "1.0.79"
-chrono = { version = "0.4.31", features = ["serde", "rustc-serialize"]}
-clap = { version = "4.3.23", features = ["derive", "cargo"] }
-clap_complete = "4.3.2"
+chrono = { version = "0.4.33", features = ["serde"]}
+clap = { version = "4.4.18", features = ["derive", "cargo"] }
+clap_complete = "4.4.10"
 html-escape = "0.2.13"
-reqwest = { version = "0.11.22", features = ["blocking"] }
+reqwest = { version = "0.11.24", features = ["blocking"] }
 ron = "0.8.1"
-semver = "1.0.20"
-serde = { version = "1.0.189", features = ["derive"] }
-serde_yaml = "0.9.25"
+semver = "1.0.21"
+serde = { version = "1.0.196", features = ["derive"] }
+serde_yaml = "0.9.31"
 thiserror = "1.0.56"
-toml = "0.8.8"
+toml = "0.8.9"
 whoami = "1.4.1"
 xmltree = "0.10.3"
 
