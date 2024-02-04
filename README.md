@@ -162,14 +162,14 @@ mpl stash list --verbose
 
 ### Start fresh 🧼
 
-**mpl** relies on BoardGameGeek item IDs to manage the titles you add to your
-stashes. The easiest way to get these is by searching BoardGameGeek:
+**mpl** relies on BoardGameGeek item IDs to manage titles in your stashes. The
+easiest way to get these is by searching BoardGameGeek:
 
 ```sh
 mpl bgg search "wingspan"
 ```
 
-Copy an item ID from the output and use it in another command:
+Copy a title ID from the output and use it in another command:
 
 ```sh
 mpl add -s=collection 266192
@@ -177,7 +177,7 @@ mpl add -s=collection 266192
 
 You've added Wingspan 🦜 to the `collection` stash!
 
-Now let's see what's in your collection:
+Now let's see what's in your stash:
 
 ```sh
 mpl titles -s=collection
@@ -194,24 +194,41 @@ discover what to do next!
 ### Root 🚧
 
 - `mpl add` ✳️ - add titles to a stash
+  - `-s`/`--stash` [Opt] ❌ - stash to add titles to
+  - `-v`/`--verbose` [Flg] ❌ - include additional output
 - `mpl drop` ✳️ - drop titles from a stash
+  - `-s`/`--stash` [Opt] ❌ - stash to drop titles from
+  - `-f`/`--force` [Flg] ❌ - drop titles without confirmation
+  - `-v`/`--verbose` [Flg] ❌ - include additional output
 - `mpl list` 🚧 - list stashed titles
-  - `--sort` ❌ - sort titles by provided value
-  - `-g`/`--games-only` ❌ - list only games
-  - `-e`/`--expansions-only` ❌ - list only expansions
-  - `--group-expansions` ❌ - group expansions below their parent game
+  - `--sort` [Opt] ❌ - sort titles by provided value. values: [rank, rating,
+    weight, year, name, id, time]. default: rating
+  - `-g`/`--games-only` [Flg] ❌ - list only games
+  - `-e`/`--expansions-only` [Flg] ❌ - list only expansions
+  - `--group` [Opt] ❌ - group expansions below their parent game. default: true
+  - `--players` [Opt] ❌ - list only games that support the given player count
+  - `--max-time` [Opt] ❌ - list only games that fit the given play time (Min.)
+  - `--weight` [Opt] ❌ - list only games that match the given weight class. options:
+    [1,2,3,4]. ex: 2 -> 2.00-2.99
+  - `-v`/`--verbose` [Flg] ❌ - include additional columns in output
 - `mpl move` ❌ - move titles to another stash
-<!-- - `mpl update` ❌ - update local stash data -->
+  - `-s`/`--from-stash` [Opt] ❌ - source stash
+  - `-d`/`--to-stash` [Opt] ❌ - destination stash
+  - `-v`/`--verbose` [Flg] ❌ - include additional output
 
 ### Profiles 🚧
 
 Manage user profiles.
 
 - `mpl profile list` ✳️ - list all existing profiles
-- `mpl profile active` ✅ - display the current profile
+  - `-v`/`--verbose` [Flg] ❌ - include additional columns in output
+- `mpl profile active` ✅ - show the current active profile
+  - `-v`/`--verbose` [Flg] ❌ - include additional columns in output
 - `mpl profile switch` ✳️ - switch the active profile
 - `mpl profile create` ✳️ - create a new profile
+  - `--active` [Flg] ✳️ - make the new profile the active profile
 - `mpl profile delete` ✳️ - delete an existing profile
+  - `-f`/`--force` [Flg] ❌ - delete profile without confirmation
 - `mpl profile rename` ❌ - rename an existing profile
 
 ### Stashes 🚧
@@ -226,8 +243,9 @@ Manage local stashes in the active profile.
 
 - `mpl stash create` ✳️ - create new stashes
 - `mpl stash delete` ✳️ - delete existing stashes
+  - `-f`/`--force` [Flg] ❌ - delete stash without confirmation
 - `mpl stash list` ✳️ - list existing stashes
-  - `-v`/`--verbose` ❌ - list stats for stashes
+  - `-v`/`--verbose` [Flg] ❌ - list stats for stashes
 - `mpl stash rename` ❌ - rename an existing stash
 - `mpl stash info` ❌ - view details of a stash
 - `mpl stash move` ❌ - move stashes to another profile
@@ -237,17 +255,21 @@ Manage local stashes in the active profile.
 Perform BoardGameGeek related actions.
 
 - `mpl bgg search` ✳️ - search boardgamegeek for titles
-  - Flag `--market` ❌ - search geek market listings
+  - `--market` [Flg] ❌ - search geek market listings
+  - `-v`/`--verbose` [Flg] ❌ - include additional columns in output
 - `mpl bgg info` ✳️ - view title details
 - `mpl bgg open` ❌ - open links in the web browser
-  - Option `--title` - open a title's boardgamegeek page(s)
-  - Option `--campaign` - open a title's crowdfunding campaign page
-  - Option `--listing` - open a geek market listing
+  - `--page` [Opt] - open a title's boardgamegeek page(s)
+  - `--campaign` [Opt] - open a title's crowdfunding campaign page
+  - `--listing` [Opt] - open a geek market listing
 - `mpl bgg import` ❌ - import bgg user collections
-  - Option `--dry-run` ❌ - simulate import without persisting changes
+  - `-u`/`--user` [Opt] ❌ - bgg user to import collections from
+  - `--dry-run` [Flg] ❌ - simulate import without persisting changes
 - `mpl bgg hotness` ✳️ - view bgg hotness list
+  - `-v`/`--verbose` [Flg] ❌ - include additional columns in output
 - `mpl bgg campaigns` ❌ - list active crowdfunding campaigns
 - `mpl bgg releases` ❌ - list recent title releases
+  - `-v`/`--verbose` [Flg] ❌ - include additional columns in output
 
 ### Config 🚧
 
@@ -306,7 +328,9 @@ cases where multiple variables control the same behavior, **mpl** obeys the
 left-most present variable.
 
 - `MPL_CONFIG_HOME`/`XDG_CONFIG_HOME` ❌ - change where **mpl** configs are
-  located. Default: `~/.config/mpl/`
+  stored. Default: `~/.config/mpl/`
+- `MPL_STATE_HOME`/`XDG_STATE_HOME` ❌ - change where **mpl** state is stored.
+  Default: `~/.local/state/mpl/`
 
 ### Config options
 
@@ -317,14 +341,13 @@ These options can be managed with `mpl config`.
 > Global configs are stored in `.mpl/config.toml`.
 > Profile level configs are stored in `.mpl/<PROFILE>/config.toml`
 
-- `update_on_change` ❌ - automatically pass `--update` to add/drop operations
-  [Default `false`]
 - `quiet_success` ❌ - force `--quiet` on all supported commands on success
   [Default `false`]
 - `pretty_format` ❌ - format outputs with table borders and emojis [Default
   `true`]
 - `default_stash_name` ❌ - the default name to use when creating new stashes
   [Default `collection`]
+- `abbreviated_format` ❌ - ?
 
 ### Completions
 
