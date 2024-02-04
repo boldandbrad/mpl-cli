@@ -26,7 +26,7 @@ pub enum SubCommands {
         /// The name of the stash to drop from
         stash_name: String,
         /// The title BGG IDS to drop
-        bgg_ids: Vec<String>,
+        bgg_ids: Vec<u32>,
     },
     /// List titles in stashes
     List {},
@@ -66,7 +66,7 @@ pub enum BggSubCommands {
     /// Retrieve item details
     Info {
         /// BoardGameGeek item id
-        bgg_id: String,
+        bgg_id: u32,
         #[clap(long, short = 'v')]
         #[clap(action = ArgAction::SetTrue)]
         /// Display additional information

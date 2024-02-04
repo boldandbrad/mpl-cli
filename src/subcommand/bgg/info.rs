@@ -1,8 +1,8 @@
 use crate::util::bgg_api::get_item;
 use anyhow::Result;
 
-pub fn info(bgg_id: String, verbose: bool) -> Result<()> {
-    let response = get_item(bgg_id);
+pub fn info(bgg_id: u32, verbose: bool) -> Result<()> {
+    let response = get_item(bgg_id.to_string());
     match response {
         Ok(title) => {
             // print out title info

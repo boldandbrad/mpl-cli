@@ -194,7 +194,7 @@ discover what to do next!
 ### Root 🚧
 
 - `mpl add` ✳️ - add titles to a stash
-- `mpl drop` 🚧 - drop titles from a stash
+- `mpl drop` ✳️ - drop titles from a stash
 - `mpl list` 🚧 - list stashed titles
   - `--sort` ❌ - sort titles by provided value
   - `-g`/`--games-only` ❌ - list only games

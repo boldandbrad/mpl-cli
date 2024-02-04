@@ -1,7 +1,7 @@
 use super::Profile;
 use crate::util::fs::{
     create_dir, delete_dir, get_profiles_state_dir, read_stash_state_file, write_stash_state_file,
-    PROFILE_STASH_DIR_NAME,
+    PROFILE_STASH_DIR_NAME, STASH_STATE_FILE_NAME,
 };
 use chrono::prelude::{DateTime, Utc};
 use serde::{Deserialize, Serialize};
@@ -33,9 +33,9 @@ impl Stash {
     pub fn load(name: &String, profile_name: &String) -> Stash {
         let stash_state_file = get_profiles_state_dir()
             .join(profile_name)
-            .join("stashes")
+            .join(PROFILE_STASH_DIR_NAME)
             .join(name)
-            .join("state.ron");
+            .join(STASH_STATE_FILE_NAME);
         let stash_state = read_stash_state_file(stash_state_file);
         Stash {
             name: name.to_string(),
@@ -82,12 +82,17 @@ impl StashState {
 
     pub fn save(&mut self, stash_state_dir: &Path) {
         self.timestamp = Utc::now();
-        let stash_state_file = stash_state_dir.join("state.ron");
+        let stash_state_file = stash_state_dir.join(STASH_STATE_FILE_NAME);
         write_stash_state_file(self, stash_state_file);
     }
 
     pub fn add_title(&mut self, title_id: u32) {
         self.title_ids.push(title_id);
+    }
+
+    pub fn drop_title(&mut self, title_id: u32) {
+        let index = self.title_ids.iter().position(|&t| t == title_id).unwrap();
+        self.title_ids.remove(index);
     }
 
     // pub fn get_titles() -> Vec<Title> {}

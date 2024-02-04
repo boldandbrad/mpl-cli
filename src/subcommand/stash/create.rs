@@ -15,7 +15,7 @@ pub fn create(stash_names: Vec<String>, profile: Option<String>) -> Result<()> {
             if get_dir_names(&get_profiles_config_dir()).contains(&profile_name) {
                 active_profile = Profile::load(&profile_name);
             } else {
-                return Err(anyhow!("Error: Profile '{}' doesn't exist.", profile_name));
+                return Err(anyhow!("Profile '{}' doesn't exist.", profile_name));
             }
         }
     }

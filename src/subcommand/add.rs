@@ -1,5 +1,5 @@
 use crate::structs::{GlobalState, Profile};
-use crate::util::fs::{get_dir_names, get_profiles_state_dir};
+use crate::util::fs::{get_dir_names, get_profiles_state_dir, PROFILE_STASH_DIR_NAME};
 use anyhow::{anyhow, Result};
 
 pub fn add(stash_name: String, bgg_ids: Vec<u32>) -> Result<()> {
@@ -9,7 +9,7 @@ pub fn add(stash_name: String, bgg_ids: Vec<u32>) -> Result<()> {
     let profile_stash_names = get_dir_names(
         &get_profiles_state_dir()
             .join(&active_profile.name)
-            .join("stashes"),
+            .join(PROFILE_STASH_DIR_NAME),
     );
     if !profile_stash_names.contains(&stash_name) {
         return Err(anyhow!("Stash '{}' does not exist.", stash_name));

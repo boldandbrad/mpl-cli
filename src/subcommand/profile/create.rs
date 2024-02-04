@@ -6,7 +6,7 @@ pub fn create(profile_name: String, active: Option<bool>) -> Result<()> {
     // check if profile already exists
     let profile_names = get_dir_names(&get_profiles_config_dir());
     if profile_names.contains(&profile_name) {
-        return Err(anyhow!("Error: Profile '{}' already exists.", profile_name));
+        return Err(anyhow!("Profile '{}' already exists.", profile_name));
     }
 
     // create and initialize profile

@@ -11,6 +11,6 @@ pub fn switch(profile_name: String) -> Result<()> {
         write_global_state_file(mpl_state);
         Ok(())
     } else {
-        Err(anyhow!("Error: Profile '{}' doesn't exist.", profile_name))
+        Err(anyhow!("Profile '{}' doesn't exist.", profile_name))
     }
 }

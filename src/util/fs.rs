@@ -37,7 +37,8 @@ static PROFILES_DIR_NAME: &str = "profiles";
 pub static PROFILE_STASH_DIR_NAME: &str = "stashes";
 
 pub static CONFIG_FILE_NAME: &str = "config.toml";
-static STATE_FILE_NAME: &str = "state.toml";
+static GLOBAL_STATE_FILE_NAME: &str = "state.toml";
+pub static STASH_STATE_FILE_NAME: &str = "state.ron";
 
 fn get_config_dir() -> PathBuf {
     let mpl_root_dir: String = MPL_ROOT_DIR_NAME.to_string();
@@ -75,7 +76,7 @@ pub fn get_profiles_state_dir() -> PathBuf {
 }
 
 pub fn get_mpl_state_file() -> PathBuf {
-    get_state_dir().join(STATE_FILE_NAME)
+    get_state_dir().join(GLOBAL_STATE_FILE_NAME)
 }
 
 pub fn get_global_config_file() -> PathBuf {
