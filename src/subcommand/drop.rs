@@ -1,19 +1,16 @@
 use crate::structs::{GlobalState, Profile};
-use crate::util::fs::{get_dir_names, get_profiles_state_dir, PROFILE_STASH_DIR_NAME};
 use anyhow::{anyhow, Result};
 
 pub fn drop(stash_name: String, bgg_ids: Vec<u32>) -> Result<()> {
     // println!("Drop {:?} from {:?}", bgg_ids, stash_name);
     // check if the stash exists
     let active_profile = Profile::load(&GlobalState::load().active_profile);
-    let profile_stash_names = get_dir_names(
-        &get_profiles_state_dir()
-            .join(&active_profile.name)
-            .join(PROFILE_STASH_DIR_NAME),
-    );
+    let profile_stash_names = active_profile.get_stash_names();
     if !profile_stash_names.contains(&stash_name) {
         return Err(anyhow!("Stash '{}' does not exist.", stash_name));
     }
+
+    // TODO: add confirmation
 
     for mut stash in active_profile.stashes.clone() {
         if stash.name == stash_name {

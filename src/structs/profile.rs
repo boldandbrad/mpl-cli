@@ -43,6 +43,11 @@ impl Profile {
         }
     }
 
+    pub fn get_stash_names(&self) -> Vec<String> {
+        let profile_state_dir = get_profiles_state_dir().join(&self.name);
+        get_dir_names(&profile_state_dir.join(PROFILE_STASH_DIR_NAME))
+    }
+
     pub fn get_config_dir(&self) -> PathBuf {
         get_profiles_config_dir().join(&self.name)
     }

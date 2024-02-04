@@ -180,7 +180,7 @@ You've added Wingspan 🦜 to the `collection` stash!
 Now let's see what's in your stash:
 
 ```sh
-mpl titles -s=collection
+mpl list -s=collection
 ```
 
 Run `mpl --help` or read the [docs](https://boldandbrad.github.io/mpl/) to

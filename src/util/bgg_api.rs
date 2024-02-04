@@ -72,9 +72,15 @@ pub fn get_items(bgg_ids: Vec<String>) -> Result<Vec<Title>> {
 }
 
 pub fn get_item(bgg_id: String) -> Result<Title> {
-    let items_result = get_items(vec![bgg_id]);
+    let items_result = get_items(vec![bgg_id.clone()]);
     match items_result {
-        Ok(titles) => Ok(titles.into_iter().next().unwrap()),
+        Ok(titles) => {
+            if !titles.is_empty() {
+                Ok(titles.into_iter().next().unwrap())
+            } else {
+                Err(anyhow!("Item {:?} not found", bgg_id))
+            }
+        }
         Err(e) => Err(e),
     }
 }
