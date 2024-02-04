@@ -1,6 +1,7 @@
 use super::{Config, Stash};
 use crate::util::fs::{
-    create_dir, delete_dir, get_dir_names, get_profiles_dir, PROFILE_STASH_DIR_NAME,
+    create_dir, delete_dir, get_dir_names, get_profiles_config_dir, get_profiles_state_dir,
+    PROFILE_STASH_DIR_NAME,
 };
 use serde::{Deserialize, Serialize};
 use std::path::PathBuf;
@@ -30,39 +31,46 @@ impl Profile {
     }
 
     // load an existing profile
-    pub fn load(name: String) -> Profile {
-        let profile_dir = get_profiles_dir().join(&name);
-        let stash_names = get_dir_names(&profile_dir.join(PROFILE_STASH_DIR_NAME));
-        let stashes: Vec<Stash> = stash_names.iter().map(Stash::load).collect();
+    pub fn load(name: &String) -> Profile {
+        let profile_config_dir = get_profiles_config_dir().join(name);
+        let profile_state_dir = get_profiles_state_dir().join(name);
+        let stash_names = get_dir_names(&profile_state_dir.join(PROFILE_STASH_DIR_NAME));
+        let stashes: Vec<Stash> = stash_names.iter().map(|x| Stash::load(x, name)).collect();
         Profile {
-            config: Config::load(Some(profile_dir)),
-            name,
+            config: Config::load(Some(profile_config_dir)),
+            name: name.to_owned(),
             stashes,
         }
     }
 
-    pub fn get_dir(&self) -> PathBuf {
-        get_profiles_dir().join(&self.name)
+    pub fn get_config_dir(&self) -> PathBuf {
+        get_profiles_config_dir().join(&self.name)
+    }
+
+    pub fn get_state_dir(&self) -> PathBuf {
+        get_profiles_state_dir().join(&self.name)
     }
 
     // save the profile to the file system
     pub fn save(&self) {
         // ensure profile dirs exist
-        let profile_dir = &self.get_dir();
-        create_dir(profile_dir);
-        let profile_stashes_dir = &profile_dir.join(PROFILE_STASH_DIR_NAME);
+        let profile_config_dir = &self.get_config_dir();
+        create_dir(profile_config_dir);
+        let profile_state_dir = &self.get_state_dir();
+        let profile_stashes_dir = &profile_state_dir.join(PROFILE_STASH_DIR_NAME);
         create_dir(profile_stashes_dir);
 
         // save profile config to the file system
-        self.config.save(Some(profile_dir));
+        self.config.save(Some(profile_config_dir));
 
         // save profile stashes to the file system
-        for stash in &self.stashes {
-            stash.save(self)
+        for mut stash in self.stashes.clone() {
+            stash.save(&self.name)
         }
     }
 
     pub fn delete(&self) {
-        delete_dir(&self.get_dir())
+        delete_dir(&self.get_config_dir());
+        delete_dir(&self.get_state_dir());
     }
 }

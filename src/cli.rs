@@ -19,7 +19,7 @@ pub enum SubCommands {
         /// The name of the stash to add to
         stash_name: String,
         /// The title BGG IDS to add
-        bgg_ids: Vec<String>,
+        bgg_ids: Vec<u32>,
     },
     /// Drop titles from a stash
     Drop {

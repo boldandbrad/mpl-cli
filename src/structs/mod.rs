@@ -9,6 +9,7 @@ pub use profile::Profile;
 
 pub mod stash;
 pub use stash::Stash;
+pub use stash::StashState;
 
 pub mod title;
 pub use title::Title;

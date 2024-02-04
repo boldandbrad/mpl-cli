@@ -1,5 +1,5 @@
 use crate::util::env::get_system_user;
-use crate::util::fs::{get_mpl_state_file, read_toml_file};
+use crate::util::fs::{get_mpl_state_file, read_file};
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -10,7 +10,7 @@ pub struct GlobalState {
 impl GlobalState {
     // load global state
     pub fn load() -> GlobalState {
-        let toml_str = read_toml_file(&get_mpl_state_file());
+        let toml_str = read_file(&get_mpl_state_file());
         toml::from_str(&toml_str).expect("Could not decode toml state string.")
     }
 }

@@ -193,7 +193,7 @@ discover what to do next!
 
 ### Root 🚧
 
-- `mpl add` 🚧 - add titles to a stash
+- `mpl add` ✳️ - add titles to a stash
 - `mpl drop` 🚧 - drop titles from a stash
 - `mpl list` 🚧 - list stashed titles
   - `--sort` ❌ - sort titles by provided value
@@ -201,7 +201,7 @@ discover what to do next!
   - `-e`/`--expansions-only` ❌ - list only expansions
   - `--group-expansions` ❌ - group expansions below their parent game
 - `mpl move` ❌ - move titles to another stash
-- `mpl update` ❌ - update local stash data
+<!-- - `mpl update` ❌ - update local stash data -->
 
 ### Profiles 🚧
 

@@ -1,11 +1,10 @@
 use crate::structs::{GlobalState, Profile};
-use crate::util::fs::{get_dir_names, get_profiles_dir, write_global_state_file};
+use crate::util::fs::{get_dir_names, get_profiles_config_dir, write_global_state_file};
 use anyhow::{anyhow, Result};
 
 pub fn create(profile_name: String, active: Option<bool>) -> Result<()> {
     // check if profile already exists
-    // TODO: close with error exit code on error
-    let profile_names = get_dir_names(&get_profiles_dir());
+    let profile_names = get_dir_names(&get_profiles_config_dir());
     if profile_names.contains(&profile_name) {
         return Err(anyhow!("Error: Profile '{}' already exists.", profile_name));
     }

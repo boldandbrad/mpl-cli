@@ -1,14 +1,18 @@
-// use super::Title;
 use super::Profile;
-use crate::util::fs::{create_dir, delete_dir, PROFILE_STASH_DIR_NAME, STASH_STATE_DIR_NAME};
+use crate::util::fs::{
+    create_dir, delete_dir, get_profiles_state_dir, read_stash_state_file, write_stash_state_file,
+    PROFILE_STASH_DIR_NAME,
+};
+use chrono::prelude::{DateTime, Utc};
 use serde::{Deserialize, Serialize};
+use std::path::Path;
 
 pub static DEFAULT_STASH_NAME: &str = "collection";
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct Stash {
     pub name: String,
-    pub states: Vec<StashState>,
+    pub state: StashState,
 }
 
 impl PartialEq for Stash {
@@ -22,61 +26,69 @@ impl Stash {
     pub fn new(name: Option<&String>) -> Stash {
         Stash {
             name: name.unwrap_or(&DEFAULT_STASH_NAME.to_string()).to_owned(),
-            states: vec![],
+            state: StashState::new(),
         }
     }
 
-    pub fn load(name: &String) -> Stash {
+    pub fn load(name: &String, profile_name: &String) -> Stash {
+        let stash_state_file = get_profiles_state_dir()
+            .join(profile_name)
+            .join("stashes")
+            .join(name)
+            .join("state.ron");
+        let stash_state = read_stash_state_file(stash_state_file);
         Stash {
             name: name.to_string(),
-            // TODO: load states
-            states: vec![],
+            state: stash_state,
         }
     }
 
-    pub fn save(&self, profile: &Profile) {
-        // ensure stash dir exists
-        let stash_dir = &profile
-            .get_dir()
+    pub fn save(&mut self, profile_name: &String) {
+        let stash_state_dir = get_profiles_state_dir()
+            .join(profile_name)
             .join(PROFILE_STASH_DIR_NAME)
             .join(&self.name);
-        create_dir(stash_dir);
 
-        // ensure stash state dir exists
-        let stash_state_dir = &stash_dir.join(STASH_STATE_DIR_NAME);
-        create_dir(stash_state_dir);
+        create_dir(&stash_state_dir);
 
-        // TODO: save stash state to the file system
+        self.state.timestamp = Utc::now();
+
+        // write stash state file
+        let _ = &self.state.save(&stash_state_dir);
     }
 
     pub fn delete(&self, profile: &Profile) {
-        let stash_dir = &profile
-            .get_dir()
+        let stash_state_dir = &&profile
+            .get_state_dir()
             .join(PROFILE_STASH_DIR_NAME)
             .join(&self.name);
-        delete_dir(stash_dir)
+        delete_dir(stash_state_dir)
     }
-    // pub fn get_current_state() -> StashState {}
-
-    // pub fn get_previous_state() -> StashState {}
-
-    // pub fn get_state_by_date() -> StashState {}
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct StashState {
-    pub timestamp: String,
+    pub timestamp: DateTime<Utc>,
     pub title_ids: Vec<u32>,
 }
 
 impl StashState {
-    // pub fn new() -> StashState {
-    //     StashState {
-    //         timestamp: "dfsd".to_string(),
-    //         title_ids: vec![],
-    //     }
-    // }
+    pub fn new() -> StashState {
+        StashState {
+            timestamp: Utc::now(),
+            title_ids: vec![],
+        }
+    }
 
-    // pub fn save(&self) {}
+    pub fn save(&mut self, stash_state_dir: &Path) {
+        self.timestamp = Utc::now();
+        let stash_state_file = stash_state_dir.join("state.ron");
+        write_stash_state_file(self, stash_state_file);
+    }
+
+    pub fn add_title(&mut self, title_id: u32) {
+        self.title_ids.push(title_id);
+    }
+
     // pub fn get_titles() -> Vec<Title> {}
 }
